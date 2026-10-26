@@ -244,6 +244,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
       <a href="#attention">Attention</a>
       <a href="#transformer">Transformer</a>
       <a href="#agents">LLMs &amp; agents</a>
+      <a href="#rag">RAG</a>
       <a href="#fundamentals">Fundamentals</a>
       <a href="#metrics">Metrics</a>
       <a href="#optimisation">Optimisation</a>
@@ -277,7 +278,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <div class="howto">
       <div><b>Test mode</b><p>Read the question, answer it out loud, then open the card. If you couldn't say it, you don't have it.</p></div>
       <div><b>Mark the shaky ones</b><p>Hit <em>Mark for review</em> inside a card, then filter to just those on the second pass.</p></div>
-      <div><b>One hour?</b><p>Skim Ground floor, then attention, then LLMs &amp; agents. Skip the rest.</p></div>
+      <div><b>One hour?</b><p>Skim Ground floor, then attention, then LLMs &amp; agents, then RAG. Skip the rest.</p></div>
     </div>
   </div>
 </div>
@@ -1289,6 +1290,60 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     is never told about. If the scored tier improves while the guard tier degrades, the agent is gaming, not
     solving.</p>
   </div>
+</div></section>
+
+<section id="rag"><div class="wrap">
+<p class="eyebrow">Grounding models in your data</p>
+<h2>Retrieval-augmented generation</h2>
+<div class="say"><div class="lbl">The spoken answer — about thirty seconds</div><p>RAG retrieves relevant documents at query time and gives them to the model as context, so it answers from your data instead of from memory. Offline you chunk the documents, embed them and store them in an index. At query time you embed the question, retrieve the closest chunks — usually hybrid with keyword search — rerank them, and have the model answer with citations. It gives you fresh, private, checkable knowledge without retraining, and when it goes wrong, it's usually retrieval, so you evaluate that separately.</p></div>
+<figure>
+<svg viewBox="0 0 780 250" role="img" aria-label="RAG pipeline: indexing and query paths">
+<defs><marker id="ahr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--ink-3)"/></marker></defs>
+<text x="20" y="20" class="s-t-a">INDEXING — OFFLINE</text>
+<g class="s-t-m" text-anchor="middle">
+<rect x="20" y="32" width="96" height="34" rx="4" class="s-box"/><text x="68" y="53">documents</text>
+<rect x="150" y="32" width="96" height="34" rx="4" class="s-box"/><text x="198" y="53">chunk</text>
+<rect x="280" y="32" width="96" height="34" rx="4" class="s-box-a"/><text x="328" y="53">embed</text>
+<rect x="410" y="32" width="120" height="34" rx="4" class="s-box-a"/><text x="470" y="53">vector index</text>
+</g>
+<path d="M118 49 H146 M248 49 H276 M378 49 H406" class="s-arrow" marker-end="url(#ahr)"/>
+<text x="20" y="104" class="s-t-a">QUERY — ONLINE</text>
+<g class="s-t-m" text-anchor="middle">
+<rect x="20" y="116" width="96" height="34" rx="4" class="s-box"/><text x="68" y="137">question</text>
+<rect x="150" y="116" width="96" height="34" rx="4" class="s-box"/><text x="198" y="137">rewrite + embed</text>
+<rect x="410" y="116" width="120" height="34" rx="4" class="s-box-a"/><text x="470" y="137">retrieve top-k</text>
+<rect x="560" y="116" width="86" height="34" rx="4" class="s-box-w"/><text x="603" y="137">rerank</text>
+<rect x="676" y="116" width="86" height="34" rx="4" class="s-box-a"/><text x="719" y="137">LLM + cite</text>
+</g>
+<path d="M118 133 H146 M248 133 H406 M532 133 H556 M648 133 H672" class="s-arrow" marker-end="url(#ahr)"/>
+<path d="M470 68 V112" class="s-arrow" marker-end="url(#ahr)" stroke-dasharray="4 3"/>
+<text x="330" y="126" class="s-t-s" text-anchor="middle">dense + BM25</text>
+<rect x="20" y="172" width="742" height="64" rx="6" class="s-box" fill="var(--accent-soft)" stroke="var(--accent)" stroke-opacity=".35"/>
+<text x="34" y="194" class="s-t" font-weight="600">Most RAG failures are retrieval failures.</text>
+<text x="34" y="212" class="s-t-s">If the right chunk never reaches the prompt, no model or prompt fixes it. Evaluate retrieval (recall@k) separately</text>
+<text x="34" y="226" class="s-t-s">from generation (faithfulness), and debug in that order.</text>
+</svg>
+<figcaption><b>Two pipelines sharing one index.</b> Indexing runs once per document; the query path runs per question. The reranker is the cheapest big quality win.</figcaption>
+</figure>
+<h3>Questions</h3>
+<details class="qa"><summary>What is RAG and why use it?</summary><div class="ans"><p>Retrieval-augmented generation: fetch relevant documents at query time and put them in the prompt, so the model answers from them rather than from memory.</p><p>It gives <strong>fresh knowledge without retraining</strong>, access to private data, <strong>citations</strong> you can check, and fewer hallucinations. The weights never change.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Walk through a RAG pipeline end to end.</summary><div class="ans"><p><strong>Indexing (offline):</strong> load documents → clean → chunk → embed each chunk → store vectors plus metadata in an index.</p><p><strong>Query (online):</strong> rewrite the query if needed → embed it → retrieve top-k (dense, often hybrid with BM25) → rerank → assemble the prompt with the chunks → generate with citations → optionally verify the answer is grounded.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you choose a chunk size?</summary><div class="ans"><p>It's a trade-off. Small chunks retrieve precisely but lose context; large chunks keep context but dilute the embedding and waste prompt space. Typical starting point: a few hundred tokens with 10–20% overlap.</p><p>Better: split on structure (headings, paragraphs, code blocks) rather than fixed length, and <strong>tune chunk size against retrieval recall on your own eval set</strong>.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span>Is bigger chunk size always better because the LLM gets more context?</summary><div class="ans"><p><strong>No.</strong> One embedding has to summarise the whole chunk, so a large chunk covering several topics matches none of them well. You also fit fewer distinct chunks in the prompt. A common fix is <strong>small-to-big</strong>: retrieve on small chunks, then pass their parent section to the model.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Dense vs sparse retrieval — and why hybrid?</summary><div class="ans"><p><strong>Sparse</strong> (BM25): keyword matching. Great for exact terms, names, IDs, error codes. Misses synonyms.</p><p><strong>Dense</strong>: embedding similarity. Captures meaning and paraphrase. Weak on rare exact tokens.</p><p><strong>Hybrid</strong> runs both and fuses the rankings, usually with reciprocal rank fusion. It reliably beats either alone, which is why it's the production default.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Bi-encoder vs cross-encoder — where does each go?</summary><div class="ans"><p>A <strong>bi-encoder</strong> embeds query and document separately, so document vectors are precomputed and search is fast. Used for first-stage retrieval.</p><p>A <strong>cross-encoder</strong> reads query and document together and outputs a relevance score. Far more accurate but must run per pair, so it's used to <strong>rerank</strong> the top 20–100 candidates.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How does a vector index search millions of vectors quickly?</summary><div class="ans"><p>Approximate nearest neighbour search. <strong>HNSW</strong> builds a layered proximity graph and greedily walks it; <strong>IVF</strong> clusters vectors and searches only the nearest clusters; <strong>product quantisation</strong> compresses vectors to save memory. You trade a little recall for orders-of-magnitude speed.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span>Is a vector database required for RAG?</summary><div class="ans"><p><strong>No.</strong> For thousands of chunks, brute-force cosine similarity in NumPy is fine. Postgres with pgvector or plain Elasticsearch/BM25 often suffice. A dedicated vector DB pays off at scale or when you need filtering, updates and replication.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Cosine similarity or dot product?</summary><div class="ans"><p>Cosine ignores vector length; dot product doesn't. If embeddings are L2-normalised they're identical. Use what the embedding model was trained with.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you improve the query side?</summary><div class="ans"><p><strong>Query rewriting</strong> (turn a chatty follow-up into a standalone question using chat history), <strong>multi-query</strong> (generate several phrasings and merge results), <strong>HyDE</strong> (generate a hypothetical answer and embed that, since answers look more like documents than questions do), and <strong>metadata filters</strong> (date, product, permissions).</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you evaluate a RAG system?</summary><div class="ans"><p>Split it into two problems, because they fail differently.</p><p><strong>Retrieval:</strong> recall@k, MRR, nDCG against a labelled set of question → relevant-chunk pairs. <strong>Generation:</strong> faithfulness (is every claim supported by the retrieved context?), answer relevance, and correctness against references. Tools like RAGAS automate parts with LLM judges; spot-check them by hand.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span>The RAG answer is wrong. Where do you look first?</summary><div class="ans"><p><strong>Retrieval.</strong> Check whether the right chunk was in the top-k at all. If it wasn't, no prompt change will help — fix chunking, embeddings, hybrid search or the query. If it was retrieved and the answer is still wrong, then look at the prompt, context order and the model.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>What is 'lost in the middle' and how does it affect RAG?</summary><div class="ans"><p>Models use information at the start and end of a long context better than the middle. So stuffing 50 chunks can hurt. Retrieve fewer, rerank, and put the most relevant chunks first or last.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you stop RAG hallucinating anyway?</summary><div class="ans"><p>Instruct the model to answer only from the provided context and to say when it can't; require <strong>citations per claim</strong>; set a retrieval score threshold below which you abstain; and run a groundedness check on the output.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span>Long-context models — does that make RAG obsolete?</summary><div class="ans"><p><strong>No.</strong> Putting everything in context costs far more per query, is slower, still suffers lost-in-the-middle, and can't cover corpora larger than the window or enforce per-user access. Long context and RAG are complementary: retrieve, then use the long window to include more of what you retrieved.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>What are advanced RAG patterns worth naming?</summary><div class="ans"><p><strong>Agentic RAG</strong>: the model decides when and what to search, possibly several times. <strong>GraphRAG</strong>: build a knowledge graph of entities for multi-hop and global questions. <strong>Contextual retrieval</strong>: prepend a short document-level summary to each chunk before embedding so it keeps its context. <strong>Self-RAG / corrective RAG</strong>: the model grades retrieved documents and re-retrieves if they're poor.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>RAG vs fine-tuning — when each?</summary><div class="ans"><p>RAG for <strong>knowledge</strong>: facts that change, need citations, or are private. Fine-tuning for <strong>behaviour</strong>: format, style, domain jargon, tool use. They combine well — fine-tune the model to use retrieved context better.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>What security issues does RAG introduce?</summary><div class="ans"><p><strong>Prompt injection</strong> through retrieved documents (a page saying 'ignore previous instructions'), and <strong>access-control leaks</strong> — retrieving chunks the user isn't allowed to see. Enforce permissions as filters at retrieval time, not in the prompt, and treat retrieved text as data.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <!-- ============ FUNDAMENTALS ============ -->
