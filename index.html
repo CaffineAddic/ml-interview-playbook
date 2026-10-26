@@ -17,7 +17,6 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0C6F79">
 <meta name="description" content="Spoken-answer ML interview prep: fundamentals, transformers, LLMs, classical ML, MLOps, system design.">
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
@@ -433,7 +432,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a token the same as a word?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a token the same as a word?</summary>
   <div class="ans">
     <p><strong>No.</strong> "Tokenising" might be three tokens; "the" is one; an emoji can be several; and a
     space usually attaches to the front of the following token.</p>
@@ -457,7 +456,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Are logits probabilities?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Are logits probabilities?</summary>
   <div class="ans">
     <p><strong>No.</strong> Logits are the raw, unbounded real-valued outputs of the final layer — they can be
     negative and they don't sum to anything in particular. Softmax turns them into probabilities.</p>
@@ -467,7 +466,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is softmax just normalising the numbers?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is softmax just normalising the numbers?</summary>
   <div class="ans">
     <p><strong>No — it exponentiates first, then normalises.</strong> That's the whole character of it: the
     exponential amplifies differences, so a modest lead in the logits becomes a large lead in probability.
@@ -553,7 +552,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     where in this loop something happens.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does backpropagation update the weights?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does backpropagation update the weights?</summary>
   <div class="ans">
     <p><strong>No — it computes the gradients.</strong> Backprop is the chain rule applied efficiently
     backwards through the computation graph, producing ∂loss/∂parameter for every parameter. The
@@ -583,7 +582,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>What is a deep network with no activation function?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> What is a deep network with no activation function?</summary>
   <div class="ans">
     <p><strong>A single linear layer.</strong> The composition of linear maps is itself linear, so stacking
     fifty of them gives you exactly the expressive power of one — you've just factorised one matrix into
@@ -849,7 +848,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Why √d<sub>k</sub> rather than d<sub>k</sub>?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Why √d<sub>k</sub> rather than d<sub>k</sub>?</summary>
   <div class="ans">
     <p>Because the <em>variance</em> scales with d<sub>k</sub>, so the <em>standard deviation</em> — the scale
     the numbers actually live on — scales with √d<sub>k</sub>. You normalise by the standard deviation, not
@@ -867,7 +866,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is multi-head attention more expensive than single-head?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is multi-head attention more expensive than single-head?</summary>
   <div class="ans">
     <p><strong>No — roughly the same.</strong> The usual setup is d<sub>k</sub> = d<sub>model</sub> / h, so
     each head works in a smaller subspace and the total work across h heads matches one full-width head.</p>
@@ -875,7 +874,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is self-attention permutation invariant?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is self-attention permutation invariant?</summary>
   <div class="ans">
     <p><strong>Equivariant, not invariant.</strong> Shuffle the input tokens and you get the same outputs,
     shuffled the same way. An invariant function would return an identical result regardless of order.</p>
@@ -943,7 +942,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     and the answer most people half-know.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does attention have learnable parameters in the softmax?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does attention have learnable parameters in the softmax?</summary>
   <div class="ans">
     <p><strong>No.</strong> The softmax, the scaling and the weighted sum are all parameter-free. Every
     learned parameter in an attention block sits in the projections W<sub>Q</sub>, W<sub>K</sub>,
@@ -1054,7 +1053,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Where do most of a transformer's parameters live?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Where do most of a transformer's parameters live?</summary>
   <div class="ans">
     <p><strong>The feed-forward network, not attention.</strong> The FFN expands to roughly 4× the model
     dimension and back, which is about 8d² parameters per block, against roughly 4d² for the four attention
@@ -1063,7 +1062,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does the KV cache speed up training?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does the KV cache speed up training?</summary>
   <div class="ans">
     <p><strong>No.</strong> It only helps autoregressive generation. During training the full sequence is
     available at once and processed in parallel, so there is nothing to cache across steps.</p>
@@ -1192,7 +1191,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 
   <h3>Questions</h3>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does the LLM execute the tool?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does the LLM execute the tool?</summary>
   <div class="ans">
     <p><strong>No. The harness does.</strong> The model emits a structured request — a name and JSON arguments
     — and ordinary code decides whether to honour it, validates the arguments, executes, and appends the
@@ -1203,7 +1202,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does temperature 0 make an agent deterministic?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does temperature 0 make an agent deterministic?</summary>
   <div class="ans">
     <p><strong>No.</strong> Greedy decoding removes sampling noise from the model, but an agent trajectory
     still varies: tool results change, timing and ordering change, floating-point non-determinism on GPU
@@ -1213,7 +1212,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a fixed pipeline that calls an LLM several times an agent?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a fixed pipeline that calls an LLM several times an agent?</summary>
   <div class="ans">
     <p><strong>No.</strong> If you wrote the order of operations in advance, it's a pipeline. It becomes an
     agent when the model chooses what to do next and when to stop, at runtime.</p>
@@ -1242,7 +1241,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is fine-tuning a good way to add knowledge?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is fine-tuning a good way to add knowledge?</summary>
   <div class="ans">
     <p><strong>Not really — it's much better for behaviour, format and style than for facts.</strong>
     Facts injected by fine-tuning are learned unreliably, can't be updated without retraining, and don't come
@@ -1251,7 +1250,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does more context always help?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does more context always help?</summary>
   <div class="ans">
     <p><strong>No.</strong> Three reasons: attention is quadratic so cost rises sharply; the KV cache grows
     linearly and fills memory; and retrieval quality degrades in the middle of very long contexts, the
@@ -1329,18 +1328,18 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>What is RAG and why use it?</summary><div class="ans"><p>Retrieval-augmented generation: fetch relevant documents at query time and put them in the prompt, so the model answers from them rather than from memory.</p><p>It gives <strong>fresh knowledge without retraining</strong>, access to private data, <strong>citations</strong> you can check, and fewer hallucinations. The weights never change.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Walk through a RAG pipeline end to end.</summary><div class="ans"><p><strong>Indexing (offline):</strong> load documents → clean → chunk → embed each chunk → store vectors plus metadata in an index.</p><p><strong>Query (online):</strong> rewrite the query if needed → embed it → retrieve top-k (dense, often hybrid with BM25) → rerank → assemble the prompt with the chunks → generate with citations → optionally verify the answer is grounded.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you choose a chunk size?</summary><div class="ans"><p>It's a trade-off. Small chunks retrieve precisely but lose context; large chunks keep context but dilute the embedding and waste prompt space. Typical starting point: a few hundred tokens with 10–20% overlap.</p><p>Better: split on structure (headings, paragraphs, code blocks) rather than fixed length, and <strong>tune chunk size against retrieval recall on your own eval set</strong>.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is bigger chunk size always better because the LLM gets more context?</summary><div class="ans"><p><strong>No.</strong> One embedding has to summarise the whole chunk, so a large chunk covering several topics matches none of them well. You also fit fewer distinct chunks in the prompt. A common fix is <strong>small-to-big</strong>: retrieve on small chunks, then pass their parent section to the model.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is bigger chunk size always better because the LLM gets more context?</summary><div class="ans"><p><strong>No.</strong> One embedding has to summarise the whole chunk, so a large chunk covering several topics matches none of them well. You also fit fewer distinct chunks in the prompt. A common fix is <strong>small-to-big</strong>: retrieve on small chunks, then pass their parent section to the model.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Dense vs sparse retrieval — and why hybrid?</summary><div class="ans"><p><strong>Sparse</strong> (BM25): keyword matching. Great for exact terms, names, IDs, error codes. Misses synonyms.</p><p><strong>Dense</strong>: embedding similarity. Captures meaning and paraphrase. Weak on rare exact tokens.</p><p><strong>Hybrid</strong> runs both and fuses the rankings, usually with reciprocal rank fusion. It reliably beats either alone, which is why it's the production default.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Bi-encoder vs cross-encoder — where does each go?</summary><div class="ans"><p>A <strong>bi-encoder</strong> embeds query and document separately, so document vectors are precomputed and search is fast. Used for first-stage retrieval.</p><p>A <strong>cross-encoder</strong> reads query and document together and outputs a relevance score. Far more accurate but must run per pair, so it's used to <strong>rerank</strong> the top 20–100 candidates.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How does a vector index search millions of vectors quickly?</summary><div class="ans"><p>Approximate nearest neighbour search. <strong>HNSW</strong> builds a layered proximity graph and greedily walks it; <strong>IVF</strong> clusters vectors and searches only the nearest clusters; <strong>product quantisation</strong> compresses vectors to save memory. You trade a little recall for orders-of-magnitude speed.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is a vector database required for RAG?</summary><div class="ans"><p><strong>No.</strong> For thousands of chunks, brute-force cosine similarity in NumPy is fine. Postgres with pgvector or plain Elasticsearch/BM25 often suffice. A dedicated vector DB pays off at scale or when you need filtering, updates and replication.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is a vector database required for RAG?</summary><div class="ans"><p><strong>No.</strong> For thousands of chunks, brute-force cosine similarity in NumPy is fine. Postgres with pgvector or plain Elasticsearch/BM25 often suffice. A dedicated vector DB pays off at scale or when you need filtering, updates and replication.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Cosine similarity or dot product?</summary><div class="ans"><p>Cosine ignores vector length; dot product doesn't. If embeddings are L2-normalised they're identical. Use what the embedding model was trained with.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you improve the query side?</summary><div class="ans"><p><strong>Query rewriting</strong> (turn a chatty follow-up into a standalone question using chat history), <strong>multi-query</strong> (generate several phrasings and merge results), <strong>HyDE</strong> (generate a hypothetical answer and embed that, since answers look more like documents than questions do), and <strong>metadata filters</strong> (date, product, permissions).</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you evaluate a RAG system?</summary><div class="ans"><p>Split it into two problems, because they fail differently.</p><p><strong>Retrieval:</strong> recall@k, MRR, nDCG against a labelled set of question → relevant-chunk pairs. <strong>Generation:</strong> faithfulness (is every claim supported by the retrieved context?), answer relevance, and correctness against references. Tools like RAGAS automate parts with LLM judges; spot-check them by hand.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>The RAG answer is wrong. Where do you look first?</summary><div class="ans"><p><strong>Retrieval.</strong> Check whether the right chunk was in the top-k at all. If it wasn't, no prompt change will help — fix chunking, embeddings, hybrid search or the query. If it was retrieved and the answer is still wrong, then look at the prompt, context order and the model.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> The RAG answer is wrong. Where do you look first?</summary><div class="ans"><p><strong>Retrieval.</strong> Check whether the right chunk was in the top-k at all. If it wasn't, no prompt change will help — fix chunking, embeddings, hybrid search or the query. If it was retrieved and the answer is still wrong, then look at the prompt, context order and the model.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is 'lost in the middle' and how does it affect RAG?</summary><div class="ans"><p>Models use information at the start and end of a long context better than the middle. So stuffing 50 chunks can hurt. Retrieve fewer, rerank, and put the most relevant chunks first or last.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you stop RAG hallucinating anyway?</summary><div class="ans"><p>Instruct the model to answer only from the provided context and to say when it can't; require <strong>citations per claim</strong>; set a retrieval score threshold below which you abstain; and run a groundedness check on the output.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Long-context models — does that make RAG obsolete?</summary><div class="ans"><p><strong>No.</strong> Putting everything in context costs far more per query, is slower, still suffers lost-in-the-middle, and can't cover corpora larger than the window or enforce per-user access. Long context and RAG are complementary: retrieve, then use the long window to include more of what you retrieved.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Long-context models — does that make RAG obsolete?</summary><div class="ans"><p><strong>No.</strong> Putting everything in context costs far more per query, is slower, still suffers lost-in-the-middle, and can't cover corpora larger than the window or enforce per-user access. Long context and RAG are complementary: retrieve, then use the long window to include more of what you retrieved.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What are advanced RAG patterns worth naming?</summary><div class="ans"><p><strong>Agentic RAG</strong>: the model decides when and what to search, possibly several times. <strong>GraphRAG</strong>: build a knowledge graph of entities for multi-hop and global questions. <strong>Contextual retrieval</strong>: prepend a short document-level summary to each chunk before embedding so it keeps its context. <strong>Self-RAG / corrective RAG</strong>: the model grades retrieved documents and re-retrieves if they're poor.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>RAG vs fine-tuning — when each?</summary><div class="ans"><p>RAG for <strong>knowledge</strong>: facts that change, need citations, or are private. Fine-tuning for <strong>behaviour</strong>: format, style, domain jargon, tool use. They combine well — fine-tune the model to use retrieved context better.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What security issues does RAG introduce?</summary><div class="ans"><p><strong>Prompt injection</strong> through retrieved documents (a page saying 'ignore previous instructions'), and <strong>access-control leaks</strong> — retrieving chunks the user isn't allowed to see. Enforce permissions as filters at retrieval time, not in the prompt, and treat retrieved text as data.</p><button class="star">Mark for review</button></div></details>
@@ -1399,7 +1398,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does more data fix overfitting?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does more data fix overfitting?</summary>
   <div class="ans">
     <p><strong>It reduces variance, not bias.</strong> If the model is too simple for the problem, infinite
     data won't help — you'll just fit the wrong function very precisely.</p>
@@ -1421,7 +1420,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does L2 regularisation produce sparse weights?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does L2 regularisation produce sparse weights?</summary>
   <div class="ans">
     <p><strong>No — L1 does.</strong> L2 shrinks weights smoothly toward zero but essentially never to exactly
     zero, because its gradient vanishes as the weight does. L1's gradient has constant magnitude, so it pushes
@@ -1429,7 +1428,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is dropout active at test time?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is dropout active at test time?</summary>
   <div class="ans">
     <p><strong>No.</strong> At inference dropout is disabled and activations are scaled so the expected value
     matches training (or, with inverted dropout, the scaling happened during training and nothing changes at
@@ -1502,7 +1501,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     row.</b> If you can place TP, FP and FN on the grid you will never mix them up again.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>The model is 99% accurate. Is it good?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> The model is 99% accurate. Is it good?</summary>
   <div class="ans">
     <p><strong>Unknowable without the class balance.</strong> If 99.9% of voxels are background, predicting
     "nothing everywhere" scores 99.9% and finds no lesions at all.</p>
@@ -1510,7 +1509,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a high ROC-AUC enough?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a high ROC-AUC enough?</summary>
   <div class="ans">
     <p><strong>Not under heavy imbalance.</strong> ROC-AUC is the probability a random positive ranks above a
     random negative. With vast numbers of negatives, the false-positive rate stays tiny even when the absolute
@@ -1529,7 +1528,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is Dice differentiable?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is Dice differentiable?</summary>
   <div class="ans">
     <p><strong>Hard Dice isn't</strong> — it's computed on thresholded binary masks, and thresholding has zero
     gradient. <strong>Soft Dice is</strong>: you use the predicted probabilities directly instead of
@@ -1588,7 +1587,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does Adam always beat SGD?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does Adam always beat SGD?</summary>
   <div class="ans">
     <p><strong>No.</strong> Adam converges faster and is far more forgiving about learning rate, but
     well-tuned SGD with momentum frequently generalises better on vision tasks, and most ImageNet-era
@@ -1598,7 +1597,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Does gradient clipping change the direction of the update?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Does gradient clipping change the direction of the update?</summary>
   <div class="ans">
     <p><strong>Depends which kind — and this is the trap.</strong></p>
     <ul>
@@ -1611,7 +1610,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>What happens if you initialise all weights to zero?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> What happens if you initialise all weights to zero?</summary>
   <div class="ans">
     <p><strong>Nothing learns.</strong> Every unit in a layer computes the same output and receives the same
     gradient, so they stay identical forever. Symmetry never breaks, and a layer of n units has the
@@ -1631,7 +1630,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a lower learning rate always safer?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a lower learning rate always safer?</summary>
   <div class="ans">
     <p><strong>No.</strong> Too low and you train impractically slowly, and you may settle into a sharp
     minimum nearby rather than escaping to a flatter one. Gradient noise is partly a feature — it's one
@@ -1722,7 +1721,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     interview.</b> Have the what/where answer ready.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a CNN translation invariant?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a CNN translation invariant?</summary>
   <div class="ans">
     <p><strong>Equivariant, not invariant</strong> — the classic trap. Shift the input and the feature maps
     shift with it. Convolution does not discard position.</p>
@@ -1878,7 +1877,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     wins at scale or after heavy pre-training.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a ViT translation equivariant like a CNN?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a ViT translation equivariant like a CNN?</summary>
   <div class="ans">
     <p><strong>No — that property is lost.</strong> Patches are cut on a fixed grid, so shifting the image by
     less than one patch width changes the tokenisation entirely: different pixels land in different patches
@@ -1898,7 +1897,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Can you feed a trained ViT a different image size?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Can you feed a trained ViT a different image size?</summary>
   <div class="ans">
     <p><strong>Not without handling the positional embeddings.</strong> The patch embedding itself is fine —
     it's applied per patch, so more patches just means more tokens, and attention handles variable length.</p>
@@ -2024,7 +2023,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Could you use nearest-neighbour sampling instead of bilinear?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Could you use nearest-neighbour sampling instead of bilinear?</summary>
   <div class="ans">
     <p><strong>No, and this is the heart of it.</strong> Nearest-neighbour is piecewise constant in the
     sampling coordinate — nudge the coordinate a little and the output doesn't change at all until it jumps
@@ -2050,7 +2049,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is a spatial transformer a kind of transformer?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a spatial transformer a kind of transformer?</summary>
   <div class="ans">
     <p><strong>No.</strong> No attention, no queries, keys or values, no tokens. It's a differentiable warping
     module and the name is a coincidence of vocabulary.</p>
@@ -2127,7 +2126,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     about two minutes against twenty-three for the diffusion baseline.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Can a GAN tell you how likely a sample is?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Can a GAN tell you how likely a sample is?</summary>
   <div class="ans">
     <p><strong>No.</strong> A GAN is an implicit model — it can produce samples but gives no density. You
     cannot evaluate p(x), which is why GAN evaluation relies on proxy scores like FID rather than held-out
@@ -2145,7 +2144,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Diffusion is state of the art — so is it fast?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Diffusion is state of the art — so is it fast?</summary>
   <div class="ans">
     <p><strong>No, it's the slowest of the three at inference</strong>, because sampling is tens to hundreds
     of sequential forward passes. GANs and VAEs generate in one. Distillation and flow-matching approaches
@@ -2211,7 +2210,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     caveat is the part that sounds like thought rather than revision.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Why doesn't BYOL collapse to a constant?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Why doesn't BYOL collapse to a constant?</summary>
   <div class="ans">
     <p>This is the standard probing question, because the loss alone appears to have a trivial solution —
     output the same vector always.</p>
@@ -2232,7 +2231,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Can you use standard image augmentations on medical scans?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Can you use standard image augmentations on medical scans?</summary>
   <div class="ans">
     <p><strong>Not blindly.</strong> Two concrete examples worth having:</p>
     <ul>
@@ -2313,7 +2312,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     nonsense.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>What does registration output?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> What does registration output?</summary>
   <div class="ans">
     <p><strong>A transformation, not an image.</strong> The warped image is a by-product you get by applying
     it. This matters because the transformation is the object you analyse — which is exactly what the
@@ -2345,7 +2344,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is VoxelMorph supervised?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is VoxelMorph supervised?</summary>
   <div class="ans">
     <p><strong>Unsupervised.</strong> People assume supervised because it's a neural network predicting a
     deformation, but there are no ground-truth correspondences. The loss is computed by warping the moving
@@ -2355,7 +2354,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <button class="star">Mark for review</button>
   </div></details>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>High Dice on warped labels means good registration?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> High Dice on warped labels means good registration?</summary>
   <div class="ans">
     <p><strong>Not necessarily.</strong> Label overlap is an indirect proxy. A deformation can push labels into
     agreement while being locally implausible — folded, wildly non-uniform, or compressing tissue in ways no
@@ -2415,7 +2414,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     opposite sides of the split makes every number meaningless.</figcaption>
   </figure>
 
-  <details class="qa trick"><summary><span class="tag">Trick</span>Is ImageNet pre-training useless for medical images?</summary>
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is ImageNet pre-training useless for medical images?</summary>
   <div class="ans">
     <p><strong>No — it still helps</strong>, even though the domain is completely wrong, because low-level
     features (edges, textures, gradients) transfer. The gains are smaller than in natural images and mostly
@@ -2449,16 +2448,16 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   <h2>Classical ML</h2>
   <p class="noqa">Still asked everywhere, because tabular data is still most of industry — and gradient boosting still wins on it.</p>
 <details class="qa"><summary>Linear vs logistic regression?</summary><div class="ans"><p>Linear regression predicts a continuous value and minimises squared error. Logistic regression predicts a probability by passing a linear score through a sigmoid, and minimises log loss.</p><p>Despite the name, <strong>logistic regression is a classifier</strong>. Its decision boundary is linear.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is logistic regression's loss convex?</summary><div class="ans"><p><strong>Yes</strong> — log loss is convex in the weights, so there's a single global minimum. MSE through a sigmoid would <em>not</em> be convex, which is another reason cross-entropy is used.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is logistic regression's loss convex?</summary><div class="ans"><p><strong>Yes</strong> — log loss is convex in the weights, so there's a single global minimum. MSE through a sigmoid would <em>not</em> be convex, which is another reason cross-entropy is used.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Explain a decision tree.</summary><div class="ans"><p>Recursively split the data on the feature and threshold that most reduce impurity (Gini or entropy for classification, variance for regression), until a stopping rule. Interpretable, handles mixed types, no scaling needed — and overfits badly alone.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Random forest vs gradient boosting?</summary><div class="ans"><p><strong>Random forest</strong>: many deep trees trained in parallel on bootstrap samples with random feature subsets, averaged. Reduces <em>variance</em>.</p><p><strong>Gradient boosting</strong> (XGBoost, LightGBM, CatBoost): shallow trees trained sequentially, each fitting the residual gradient of the previous ensemble. Reduces <em>bias</em>. Usually more accurate, more sensitive to tuning.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Do tree models need feature scaling?</summary><div class="ans"><p><strong>No.</strong> Splits are thresholds on one feature at a time, so any monotonic transform leaves the tree unchanged. Scaling matters for distance- and gradient-based models: kNN, SVM, linear models with regularisation, neural nets.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Do tree models need feature scaling?</summary><div class="ans"><p><strong>No.</strong> Splits are thresholds on one feature at a time, so any monotonic transform leaves the tree unchanged. Scaling matters for distance- and gradient-based models: kNN, SVM, linear models with regularisation, neural nets.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Bagging vs boosting in one line each?</summary><div class="ans"><p>Bagging: train independent models on resampled data and average — cuts variance. Boosting: train models in sequence, each correcting its predecessor — cuts bias.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What does an SVM optimise, and what's the kernel trick?</summary><div class="ans"><p>It finds the hyperplane with the <strong>maximum margin</strong> to the nearest points (the support vectors), with a soft-margin penalty for violations.</p><p>The kernel trick computes inner products in a high-dimensional feature space without ever building it, so a linear separator there is a non-linear one in input space (RBF kernel is the usual default).</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>k-means — how, and what are its failure modes?</summary><div class="ans"><p>Pick k centroids, assign each point to its nearest, move each centroid to the mean of its points, repeat until stable.</p><p>Failures: you must choose k (elbow, silhouette); sensitive to initialisation (use k-means++); assumes roughly spherical, equal-size clusters; sensitive to scale and outliers.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is kNN's training expensive?</summary><div class="ans"><p><strong>No — training is free; inference is expensive.</strong> It just stores the data. Every prediction scans for neighbours, O(n·d) naively. And it degrades in high dimensions, where all distances become similar (curse of dimensionality).</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is kNN's training expensive?</summary><div class="ans"><p><strong>No — training is free; inference is expensive.</strong> It just stores the data. Every prediction scans for neighbours, O(n·d) naively. And it degrades in high dimensions, where all distances become similar (curse of dimensionality).</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What does PCA do?</summary><div class="ans"><p>Finds orthogonal directions of maximum variance — the eigenvectors of the covariance matrix (computed via SVD in practice) — and projects onto the top k.</p><p>Caveats: linear only, and variance ≠ importance for your label. Standardise first, or large-scale features dominate.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does PCA select features?</summary><div class="ans"><p><strong>No.</strong> Each component is a linear combination of <em>all</em> original features. It's dimensionality reduction, not feature selection — you lose interpretability.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does PCA select features?</summary><div class="ans"><p><strong>No.</strong> Each component is a linear combination of <em>all</em> original features. It's dimensionality reduction, not feature selection — you lose interpretability.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Naive Bayes — what is naive about it?</summary><div class="ans"><p>It assumes features are conditionally independent given the class. Almost never true, yet it works surprisingly well for text classification because ranking, not calibrated probability, is what matters.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
@@ -2468,12 +2467,12 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   <p class="noqa">Short, sharp questions where hesitation is visible.</p>
 <details class="qa"><summary>State Bayes' theorem and give the intuition.</summary><div class="ans"><p>P(A|B) = P(B|A)·P(A) / P(B). Posterior ∝ likelihood × prior.</p><p>The classic trap: a 99%-accurate test for a 1-in-1000 disease. A positive result still means only about a 9% chance of disease, because false positives from the huge healthy population swamp the true positives.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>MLE vs MAP?</summary><div class="ans"><p>MLE picks parameters that maximise the likelihood of the data. MAP maximises likelihood × prior. <strong>L2 regularisation is MAP with a Gaussian prior; L1 is MAP with a Laplace prior.</strong> That link is the line that impresses.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>What is a p-value?</summary><div class="ans"><p>The probability of seeing data at least this extreme <em>if the null hypothesis were true</em>.</p><p>It is <strong>not</strong> the probability the null is true, and not the probability your result is a fluke.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> What is a p-value?</summary><div class="ans"><p>The probability of seeing data at least this extreme <em>if the null hypothesis were true</em>.</p><p>It is <strong>not</strong> the probability the null is true, and not the probability your result is a fluke.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Type I vs Type II error?</summary><div class="ans"><p>Type I: false positive — rejecting a true null (rate α). Type II: false negative — missing a real effect (rate β). Power is 1 − β.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Central limit theorem — why do we care?</summary><div class="ans"><p>Means of many independent samples are approximately normal regardless of the underlying distribution. It's why confidence intervals and A/B tests on averages work.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does correlation of zero mean independence?</summary><div class="ans"><p><strong>No.</strong> Pearson correlation only measures linear dependence. y = x² over symmetric x has zero correlation and is completely dependent on x.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does correlation of zero mean independence?</summary><div class="ans"><p><strong>No.</strong> Pearson correlation only measures linear dependence. y = x² over symmetric x has zero correlation and is completely dependent on x.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Define KL divergence and entropy.</summary><div class="ans"><p>Entropy H(p) is the expected surprise of a distribution. Cross-entropy H(p,q) is the expected surprise when coding p with q. KL(p‖q) = H(p,q) − H(p): the extra cost. Minimising cross-entropy loss is minimising KL to the data distribution.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is KL divergence a distance?</summary><div class="ans"><p><strong>No</strong> — it isn't symmetric and doesn't satisfy the triangle inequality. KL(p‖q) ≠ KL(q‖p); forward KL is mode-covering, reverse KL is mode-seeking.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is KL divergence a distance?</summary><div class="ans"><p><strong>No</strong> — it isn't symmetric and doesn't satisfy the triangle inequality. KL(p‖q) ≠ KL(q‖p); forward KL is mode-covering, reverse KL is mode-seeking.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="data"><div class="wrap">
@@ -2483,9 +2482,9 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>How do you handle missing values?</summary><div class="ans"><p>First ask <em>why</em> they're missing — at random, or informative? Options: drop, impute (mean/median, model-based), or add a missingness indicator feature. Tree boosters handle NaN natively.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you encode categoricals?</summary><div class="ans"><p>One-hot for low cardinality. Target encoding or learned embeddings for high cardinality — with target encoding done out-of-fold, or you leak the label.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is data leakage? Give examples.</summary><div class="ans"><p>Information at training time that won't be available at prediction time. Examples: fitting a scaler on the full dataset before splitting; features computed from the future; duplicate or same-patient rows across splits; target-encoding without folds.</p><p>Symptom: validation scores too good to be true.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Should you fit normalisation on the full dataset?</summary><div class="ans"><p><strong>No — fit on train only</strong>, then apply to validation and test. Fitting on everything leaks test statistics into training.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Should you fit normalisation on the full dataset?</summary><div class="ans"><p><strong>No — fit on train only</strong>, then apply to validation and test. Fitting on everything leaks test statistics into training.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you handle class imbalance?</summary><div class="ans"><p>In rough order: use the right metric (PR-AUC, F1, recall at fixed precision); class-weighted loss or focal loss; resampling (undersample majority, oversample minority / SMOTE); tune the decision threshold. Don't resample the test set.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Random split for time-series data?</summary><div class="ans"><p><strong>No.</strong> Split by time — train on the past, validate on the future — or you leak future information. Use rolling/expanding-window validation.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Random split for time-series data?</summary><div class="ans"><p><strong>No.</strong> Split by time — train on the past, validate on the future — or you leak future information. Use rolling/expanding-window validation.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is k-fold cross-validation and when not to use it?</summary><div class="ans"><p>Split into k folds, train on k−1, validate on the rest, rotate, average. Use grouped CV when samples share an entity (patient, user), and time-based CV for temporal data. Too expensive for large deep models — use a single held-out set.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
@@ -2495,7 +2494,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   
 <details class="qa"><summary>Why do vanilla RNNs struggle with long sequences?</summary><div class="ans"><p>Backprop through time multiplies by the same recurrent Jacobian at every step, so gradients shrink or blow up exponentially with length — vanishing/exploding gradients.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How does an LSTM fix it?</summary><div class="ans"><p>A separate cell state updated <em>additively</em>, gated by forget, input and output gates. The additive path lets gradients flow across many steps — the same idea as a residual connection. GRU is a simpler two-gate variant.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does an LSTM eliminate vanishing gradients?</summary><div class="ans"><p><strong>It mitigates them, it doesn't eliminate them.</strong> Very long dependencies are still hard, and training remains sequential — which is why attention won.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does an LSTM eliminate vanishing gradients?</summary><div class="ans"><p><strong>It mitigates them, it doesn't eliminate them.</strong> Very long dependencies are still hard, and training remains sequential — which is why attention won.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is teacher forcing?</summary><div class="ans"><p>During training, feed the ground-truth previous token rather than the model's own prediction. Fast and stable, but creates exposure bias: at inference the model sees its own mistakes, which it never trained on.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Greedy, beam search, sampling — compare.</summary><div class="ans"><p>Greedy: argmax each step, fast, repetitive. Beam: keep top-k partial sequences, good for translation. Sampling with temperature / top-k / top-p (nucleus): diverse, better for open-ended generation.</p><button class="star">Mark for review</button></div></details>
 </div></section>
@@ -2508,7 +2507,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>RLHF vs DPO?</summary><div class="ans"><p>RLHF trains a reward model on human preferences, then optimises the policy against it with RL plus a KL penalty to the reference model. DPO skips the reward model and RL loop, optimising a closed-form classification loss on preferred vs rejected pairs. DPO is simpler and stabler; RL-based methods remain strong for reasoning.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is LoRA, mechanically?</summary><div class="ans"><p>Freeze W; learn a low-rank update ΔW = BA with rank r ≪ d. Trains a tiny fraction of parameters and can be merged into W after training, so <strong>no inference latency cost</strong>. QLoRA does this on a 4-bit-quantised base.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What are scaling laws?</summary><div class="ans"><p>Loss falls as a smooth power law in parameters, data and compute. Chinchilla showed many models were under-trained: compute-optimal is roughly ~20 tokens per parameter. In practice, models are now over-trained past that because inference cost dominates.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does quantisation always hurt accuracy noticeably?</summary><div class="ans"><p><strong>No.</strong> 8-bit is usually near-lossless and 4-bit (GPTQ, AWQ) costs little for large models. Damage concentrates in outlier activations, which is what those methods handle.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does quantisation always hurt accuracy noticeably?</summary><div class="ans"><p><strong>No.</strong> 8-bit is usually near-lossless and 4-bit (GPTQ, AWQ) costs little for large models. Damage concentrates in outlier activations, which is what those methods handle.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How does RAG work end to end?</summary><div class="ans"><p>Chunk documents → embed → store in a vector index. At query time, embed the query, retrieve top-k by similarity (often hybrid with BM25, then rerank with a cross-encoder), put them in the prompt, generate with citations.</p><p>Most RAG failures are retrieval failures, so evaluate retrieval (recall@k) separately from generation.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is a mixture of experts?</summary><div class="ans"><p>Replace the FFN with many expert FFNs and a router that sends each token to the top-k. Total parameters are huge, but compute per token is that of a small model. Costs: load balancing, all-expert memory footprint, communication.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Why do LLMs hallucinate?</summary><div class="ans"><p>They are trained to produce probable text, not true text, and the objective rewards fluent guessing over saying 'I don't know'. Mitigations: retrieval grounding, calibrated abstention training, verification tools.</p><button class="star">Mark for review</button></div></details>
@@ -2523,7 +2522,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>What does ZeRO / FSDP shard?</summary><div class="ans"><p>Optimiser state, gradients and finally the parameters themselves across data-parallel workers, gathering them only when needed. Adam's states are 2× the parameters in fp32, so sharding them is the big memory win.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Mixed precision — why does it work?</summary><div class="ans"><p>Compute in fp16/bf16 for speed and memory, keep a fp32 master copy of weights for the update. fp16 needs loss scaling to avoid gradient underflow; <strong>bf16 has fp32's exponent range</strong>, so it usually doesn't.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is gradient checkpointing?</summary><div class="ans"><p>Store only some activations in the forward pass and recompute the rest during backward. Trades roughly 30% more compute for a large memory saving.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does gradient accumulation equal a bigger batch?</summary><div class="ans"><p><strong>Mathematically for the gradient, yes — but not for BatchNorm</strong>, whose statistics still come from the small micro-batch. Also, the LR schedule must be in terms of optimiser steps.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does gradient accumulation equal a bigger batch?</summary><div class="ans"><p><strong>Mathematically for the gradient, yes — but not for BatchNorm</strong>, whose statistics still come from the small micro-batch. Also, the LR schedule must be in terms of optimiser steps.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Memory estimate for training a 7B model with Adam?</summary><div class="ans"><p>Rule of thumb ~16 bytes per parameter for mixed-precision Adam (weights, grads, fp32 master, two moments) ≈ 112 GB before activations. That's why you shard or use LoRA.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
@@ -2534,7 +2533,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>Collaborative vs content-based filtering?</summary><div class="ans"><p>Collaborative: learn from the user–item interaction matrix (users like you liked this). Content-based: match item features to user profiles. Hybrids are standard; content features solve cold start.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Describe a two-stage recommender.</summary><div class="ans"><p><strong>Candidate generation</strong> narrows millions of items to hundreds cheaply — two-tower embeddings with approximate nearest neighbour search. <strong>Ranking</strong> scores those with a heavy model using rich features. Often a re-ranking stage adds diversity and business rules.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you handle cold start?</summary><div class="ans"><p>New users: popularity, onboarding questions, contextual features. New items: content features, exploration (bandits).</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is offline AUC enough to ship a recommender?</summary><div class="ans"><p><strong>No.</strong> Logged data is biased by the old system's choices, and offline metrics correlate weakly with engagement. Ship via an online A/B test.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is offline AUC enough to ship a recommender?</summary><div class="ans"><p><strong>No.</strong> Logged data is biased by the old system's choices, and offline metrics correlate weakly with engagement. Ship via an online A/B test.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="rl"><div class="wrap">
@@ -2545,7 +2544,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>Exploration vs exploitation?</summary><div class="ans"><p>Exploit what you know pays off, or explore to find better. ε-greedy, UCB and Thompson sampling are the standard answers; multi-armed bandits are the simplest setting.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Value-based vs policy-gradient?</summary><div class="ans"><p>Value-based (Q-learning, DQN) learns Q and acts greedily — good for discrete actions. Policy gradient (REINFORCE, PPO) optimises the policy directly — handles continuous actions. Actor-critic combines both.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>On-policy vs off-policy?</summary><div class="ans"><p>On-policy learns from data generated by the current policy (PPO). Off-policy can learn from any data, e.g. a replay buffer (Q-learning, DQN) — more sample efficient, less stable.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is PPO's clipping what stops the policy collapsing?</summary><div class="ans"><p>Largely — it clips the probability ratio so one update can't move the policy too far, a cheap approximation of TRPO's trust region. It's also why PPO was the default RL algorithm for RLHF.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is PPO's clipping what stops the policy collapsing?</summary><div class="ans"><p>Largely — it clips the probability ratio so one update can't move the policy too far, a cheap approximation of TRPO's trust region. It's also why PPO was the default RL algorithm for RLHF.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="mlops"><div class="wrap">
@@ -2557,7 +2556,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>Batch vs online inference?</summary><div class="ans"><p>Batch: precompute predictions on a schedule — cheap, simple, stale. Online: predict on request — fresh, latency-bound, needs a feature store for consistent features.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is training–serving skew?</summary><div class="ans"><p>When features at serving time are computed differently from training. The fix is one shared feature definition — a feature store — and logging serving features for retraining.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How would you roll out a new model safely?</summary><div class="ans"><p>Offline eval → shadow mode (run alongside, don't serve) → canary to a small slice → A/B test on the business metric → gradual ramp, with automatic rollback triggers.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Is a statistically significant A/B result always worth shipping?</summary><div class="ans"><p><strong>No.</strong> Check practical effect size, guard metrics, novelty effects, peeking (repeated checking inflates false positives), and sample ratio mismatch.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is a statistically significant A/B result always worth shipping?</summary><div class="ans"><p><strong>No.</strong> Check practical effect size, guard metrics, novelty effects, peeking (repeated checking inflates false positives), and sample ratio mismatch.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What makes ML experiments reproducible?</summary><div class="ans"><p>Version code, data and config together; fix seeds; log environment and hardware; track runs (MLflow, W&B). Even then GPU non-determinism means report variance across seeds.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
@@ -2568,7 +2567,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>What framework do you use for ML system design?</summary><div class="ans"><p><strong>1. Clarify</strong> the business goal and constraints (latency, scale). <strong>2. Frame</strong> as an ML task and pick an offline metric tied to the business metric. <strong>3. Data</strong>: sources, labels, leakage risks. <strong>4. Features and model</strong>: start with a simple baseline. <strong>5. Serving</strong>: batch or online, latency budget. <strong>6. Evaluation</strong>: offline then A/B. <strong>7. Monitoring and iteration</strong>.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Design a spam / fraud detector — key points?</summary><div class="ans"><p>Extreme imbalance, adversarial and drifting distribution, delayed labels, asymmetric costs. Tree boosting on behavioural features as baseline, a threshold tuned to the cost ratio, human review queue, frequent retraining.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Design a search ranking system — key points?</summary><div class="ans"><p>Retrieval (BM25 + dense embeddings) then learning-to-rank (pointwise / pairwise / listwise) with click data, corrected for position bias. Metrics: NDCG, MRR offline; CTR and success online.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Should you start with the most powerful model?</summary><div class="ans"><p><strong>No — start with a simple baseline.</strong> It sets the bar, exposes data problems early, and is often good enough. Interviewers listen for this explicitly.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Should you start with the most powerful model?</summary><div class="ans"><p><strong>No — start with a simple baseline.</strong> It sets the bar, exposes data problems early, and is often good enough. Interviewers listen for this explicitly.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="responsible"><div class="wrap">
@@ -2577,12 +2576,13 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   
 <details class="qa"><summary>How do you explain a model's prediction?</summary><div class="ans"><p>Global: feature importance, partial dependence. Local: SHAP (Shapley-value attributions), LIME, and for images saliency / Grad-CAM. Note they explain the model, not the world, and can be unstable.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>Name some fairness definitions.</summary><div class="ans"><p>Demographic parity (equal positive rate across groups), equalised odds (equal TPR and FPR), calibration within groups. Except in trivial cases <strong>they can't all hold at once</strong> — you have to choose.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span>Does removing the sensitive attribute make a model fair?</summary><div class="ans"><p><strong>No.</strong> Proxies (postcode, name, purchase history) reintroduce it. You need the attribute to even <em>measure</em> fairness.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does removing the sensitive attribute make a model fair?</summary><div class="ans"><p><strong>No.</strong> Proxies (postcode, name, purchase history) reintroduce it. You need the attribute to even <em>measure</em> fairness.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is calibration and how do you fix it?</summary><div class="ans"><p>A calibrated model's 0.8 predictions are right 80% of the time. Check with a reliability diagram / ECE. Fix post hoc with temperature scaling, Platt scaling, or isotonic regression on held-out data.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <footer><div class="wrap">
   <p style="margin:0">Started for two interviews on 26 October 2026, expanded to cover the general ML engineer loop. Fundamentals first — the rest keeps.</p>
+  <p style="margin:8px 0 0">Made by <a href="https://claude.ai">Claude</a>.</p>
 </div></footer>
 
 <script>
