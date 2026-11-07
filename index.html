@@ -46,6 +46,38 @@ section[id]{scroll-margin-top:var(--topbar-h,64px)}
 }
 @media (prefers-reduced-motion:reduce){.side{transition:none}}
 @media print{.side,.side-scrim{display:none}body{padding-left:0}}
+
+/* ---- progress & checklist ---- */
+details.qa > summary{padding-right:46px}
+.done-cb{position:absolute;right:11px;top:9px;width:24px;height:24px;border-radius:50%;
+  border:1.5px solid var(--line-2);background:var(--surface);cursor:pointer;padding:0;
+  display:grid;place-items:center;color:transparent;transition:background .15s,border-color .15s}
+.done-cb::after{content:"";width:6px;height:11px;border:solid currentColor;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.done-cb:hover{border-color:var(--good);color:var(--good)}
+.done-cb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.qa.done .done-cb{background:var(--good);border-color:var(--good);color:var(--surface)}
+.qa.done > summary{color:var(--ink-2)}
+.qa.done{border-color:color-mix(in srgb,var(--good) 35%,var(--line))}
+body.hide-done .qa.done{display:none}
+.pbar{height:3px;background:var(--surface-3)}
+.pbar i{display:block;height:100%;width:0;background:var(--good);transition:width .3s ease}
+.pcount{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);margin-left:4px;white-space:nowrap}
+.sec-prog{font-family:var(--font-mono);font-size:11px;font-weight:400;color:var(--ink-3);margin-left:10px;letter-spacing:.02em}
+.sec-prog.full{color:var(--good)}
+.side-prog{display:flex;align-items:center;gap:10px;margin:0 8px 12px}
+.side-bar{flex:1;height:6px;border-radius:3px;background:var(--surface-3);overflow:hidden}
+.side-bar i{display:block;height:100%;width:0;background:var(--good);transition:width .3s ease}
+#sideprog{font-family:var(--font-mono);font-size:11px;color:var(--ink-2);min-width:34px;text-align:right}
+.side li a i{min-width:34px;text-align:right}
+.side li a.full i{color:var(--good);font-weight:600}
+.side li a .ring{width:12px;height:12px;border-radius:50%;flex:none;
+  background:conic-gradient(var(--good) calc(var(--p,0)*1%),var(--surface-3) 0)}
+.side li a.full .ring{background:var(--good)}
+.side-reset{margin:10px 8px 0;align-self:flex-start;background:none;border:0;padding:4px 0;cursor:pointer;
+  font-family:var(--font-mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.side-reset:hover{color:var(--warn)}
+.side-reset.confirm{color:var(--warn);font-weight:600}
+@media print{.done-cb,.pbar,.pcount{display:none}}
 </style>
 <title>ML Interview Playbook</title>
 <meta property="og:type" content="website">
@@ -280,6 +312,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <span class="side-t">Topics</span><span class="side-n">38 · 368 cards</span>
     <button class="side-x" id="sideclose" type="button" aria-label="Close topics">×</button>
   </div>
+  <div class="side-prog"><div class="side-bar"><i id="sidebarfill"></i></div><span id="sideprog">0%</span></div>
   <input class="side-q" id="sideq" type="search" placeholder="Filter topics…" aria-label="Filter topics" autocomplete="off">
   <nav class="side-nav" id="sidenav">
 <p class="side-g">Start here</p>
@@ -342,19 +375,22 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <li><a href="#responsible" data-s="responsible"><span>Responsible AI</span><i>4</i></a></li>
 </ul>
   </nav>
+  <button class="side-reset" id="sidereset" type="button">Reset progress</button>
 </aside>
 <div class="side-scrim" id="sidescrim" hidden></div>
 <header class="topbar">
   <div class="wrap">
     <div class="topline">
-      <a class="home" href="https://caffineaddic.github.io/" title="Saumya Roy — portfolio">SR</a><div class="mark">ML Playbook <span>/</span> say it out loud</div>
+      <a class="home" href="https://caffineaddic.github.io/" title="Saumya Roy — portfolio">SR</a><div class="mark">ML Playbook <span>/</span> say it out loud</div><span class="pcount" id="pcount"></span>
       <div class="tools">
         <button class="btn side-open" id="sideopen" type="button" aria-controls="side" aria-expanded="false">Topics</button>
         <button class="btn" id="mode" aria-pressed="false">Reveal all</button>
         <button class="btn" id="filter" aria-pressed="false">Marked only</button>
+        <button class="btn" id="hidedone" aria-pressed="false">Hide done</button>
       </div>
     </div>
   </div>
+  <div class="pbar" role="progressbar" aria-label="Cards done" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="pbarfill"></i></div>
 </header>
 
 <div class="hero">
@@ -3063,13 +3099,19 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   allDetails.forEach(function (d, i) {
     var s = d.querySelector("summary");
     var txt = (s ? s.textContent : "") .replace(/\s+/g, " ").trim().slice(0, 60);
-    d.dataset.qid = i + "|" + txt;
+    d.dataset.qid = txt;
   });
 
   function load() {
     try {
       var raw = localStorage.getItem(KEY);
-      return raw ? JSON.parse(raw) : {};
+      var o = raw ? JSON.parse(raw) : {}, out = {}, moved = false;
+      Object.keys(o).forEach(function (k) {
+        var m = /^\d+\|(.*)$/.exec(k);           // old "index|text" keys
+        if (m) { out[m[1]] = 1; moved = true; } else { out[k] = o[k]; }
+      });
+      if (moved) localStorage.setItem(KEY, JSON.stringify(out));
+      return out;
     } catch (e) { return {}; }
   }
   function save(obj) {
@@ -3147,6 +3189,63 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     if(best)mark(best.id);}
   var t=null;addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=null;onScroll()})},{passive:true});
   onScroll();
+})();
+</script>
+<script>
+/* progress checklist: tick cards you can say out loud; saved in this browser */
+(function(){
+  var KEY="mlpb.done.v1";
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){return{}}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+  var done=load();
+  var cards=[].slice.call(document.querySelectorAll("details.qa"));
+  function id(d){var s=d.querySelector("summary");return (s?s.textContent:"").replace(/\s+/g," ").trim().slice(0,90)}
+  var sections=[].slice.call(document.querySelectorAll("section[id]"));
+  var secCards={},secLabel={};
+  sections.forEach(function(sec){
+    var cs=[].slice.call(sec.querySelectorAll("details.qa"));
+    if(!cs.length)return; secCards[sec.id]=cs;
+    var h=sec.querySelector("h3")||sec.querySelector("h2");
+    var sp=document.createElement("span");sp.className="sec-prog";h.appendChild(sp);secLabel[sec.id]=sp;
+  });
+  cards.forEach(function(d){
+    d._id=id(d);
+    var b=document.createElement("button");b.type="button";b.className="done-cb";
+    var sum=d.querySelector("summary");sum.appendChild(b);
+    function paint(){var on=!!done[d._id];d.classList.toggle("done",on);b.setAttribute("aria-pressed",on);
+      b.setAttribute("aria-label",on?"Done — click to undo":"Mark as done");b.title=on?"Done":"I can say this";}
+    b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();
+      if(done[d._id])delete done[d._id];else done[d._id]=1;save();paint();update();});
+    d._paint=paint;paint();
+  });
+  var side={};[].forEach.call(document.querySelectorAll(".side a[data-s]"),function(a){
+    if(!a.querySelector("i"))return;var ring=document.createElement("span");ring.className="ring";a.insertBefore(ring,a.querySelector("i"));side[a.dataset.s]=a;});
+  var fill=document.getElementById("pbarfill"),bar=fill.parentNode,count=document.getElementById("pcount"),
+      sfill=document.getElementById("sidebarfill"),sprog=document.getElementById("sideprog");
+  function update(){
+    var n=0;cards.forEach(function(d){if(done[d._id])n++});
+    var pct=cards.length?Math.round(n*100/cards.length):0;
+    fill.style.width=sfill.style.width=pct+"%";bar.setAttribute("aria-valuenow",pct);
+    count.textContent=n+" / "+cards.length+" done";sprog.textContent=pct+"%";
+    Object.keys(secCards).forEach(function(k){
+      var cs=secCards[k],m=0;cs.forEach(function(d){if(done[d._id])m++});
+      var full=m===cs.length;
+      secLabel[k].textContent=m+" / "+cs.length+" done";secLabel[k].classList.toggle("full",full);
+      var a=side[k];if(a){a.querySelector("i").textContent=m+"/"+cs.length;a.classList.toggle("full",full);
+        a.querySelector(".ring").style.setProperty("--p",Math.round(m*100/cs.length));}
+    });
+  }
+  update();
+  var hd=document.getElementById("hidedone");
+  hd.addEventListener("click",function(){var on=hd.getAttribute("aria-pressed")!=="true";
+    hd.setAttribute("aria-pressed",on);document.body.classList.toggle("hide-done",on);});
+  var rs=document.getElementById("sidereset"),armed=null;
+  rs.addEventListener("click",function(){
+    if(!armed){rs.classList.add("confirm");rs.textContent="Click again to reset";
+      armed=setTimeout(function(){armed=null;rs.classList.remove("confirm");rs.textContent="Reset progress"},3000);return;}
+    clearTimeout(armed);armed=null;done={};save();cards.forEach(function(d){d._paint()});update();
+    rs.classList.remove("confirm");rs.textContent="Progress reset";setTimeout(function(){rs.textContent="Reset progress"},1500);
+  });
 })();
 </script>
 </body>
