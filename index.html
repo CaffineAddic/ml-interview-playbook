@@ -10,6 +10,42 @@
   body { margin: 0; font: 14px system-ui, -apple-system, sans-serif; }
   img { max-width: 100%; }
   [hidden] { display: none !important; }
+
+/* ---- left topic sidebar ---- */
+section[id]{scroll-margin-top:var(--topbar-h,64px)}
+.side{position:fixed;top:0;left:0;bottom:0;width:256px;z-index:60;background:var(--surface);
+  border-right:1px solid var(--line);display:flex;flex-direction:column;
+  padding:14px 10px 18px max(10px,env(safe-area-inset-left,0px))}
+.side-head{display:flex;align-items:baseline;gap:8px;padding:2px 8px 10px}
+.side-t{font-family:var(--font-display);font-weight:700;font-size:15px}
+.side-n{font-family:var(--font-mono);font-size:10.5px;color:var(--ink-3)}
+.side-x{margin-left:auto;display:none;background:none;border:0;font-size:22px;line-height:1;color:var(--ink-2);cursor:pointer;padding:0 4px}
+.side-q{margin:0 6px 10px;padding:7px 10px;font:inherit;font-size:13px;color:var(--ink);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:6px}
+.side-q:focus{outline:2px solid var(--accent);outline-offset:1px}
+.side-nav{overflow-y:auto;flex:1;scrollbar-width:thin;padding:0 2px}
+.side-g{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:14px 8px 4px}
+.side-g:first-child{margin-top:2px}
+.side ul{list-style:none;margin:0;padding:0}
+.side li a{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;font-size:13.5px;line-height:1.3;
+  color:var(--ink-2);text-decoration:none;border-left:2px solid transparent}
+.side li a span{flex:1}
+.side li a i{font-style:normal;font-family:var(--font-mono);font-size:10px;color:var(--ink-3)}
+.side li a:hover{background:var(--surface-2);color:var(--ink)}
+.side li a.on{background:var(--accent-soft);color:var(--ink);border-left-color:var(--accent);font-weight:600}
+.side li.hide,.side-g.hide{display:none}
+.side-scrim{position:fixed;inset:0;z-index:55;background:rgba(10,12,16,.45)}
+@media (min-width:1100px){
+  body{padding-left:256px}
+  .side-open{display:none}
+}
+@media (max-width:1099.98px){
+  .side{transform:translateX(-102%);transition:transform .22s ease;box-shadow:0 0 40px rgba(0,0,0,.25);width:min(300px,86vw)}
+  .side.open{transform:none}
+  .side-x{display:block}
+}
+@media (prefers-reduced-motion:reduce){.side{transition:none}}
+@media print{.side,.side-scrim{display:none}body{padding-left:0}}
 </style>
 <title>ML Interview Playbook</title>
 <meta property="og:type" content="website">
@@ -239,55 +275,85 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 </style>
 </head>
 <body>
+<aside class="side" id="side" aria-label="Topics">
+  <div class="side-head">
+    <span class="side-t">Topics</span><span class="side-n">38 · 368 cards</span>
+    <button class="side-x" id="sideclose" type="button" aria-label="Close topics">×</button>
+  </div>
+  <input class="side-q" id="sideq" type="search" placeholder="Filter topics…" aria-label="Filter topics" autocomplete="off">
+  <nav class="side-nav" id="sidenav">
+<p class="side-g">Start here</p>
+<ul>
+<li><a href="#stuck" data-s="stuck"><span>When stuck</span></a></li>
+<li><a href="#basics" data-s="basics"><span>Ground floor</span><i>12</i></a></li>
+</ul>
+<p class="side-g">LLMs & language</p>
+<ul>
+<li><a href="#attention" data-s="attention"><span>Attention</span><i>9</i></a></li>
+<li><a href="#transformer" data-s="transformer"><span>Transformer</span><i>7</i></a></li>
+<li><a href="#agents" data-s="agents"><span>LLMs &amp; agents</span><i>19</i></a></li>
+<li><a href="#rag" data-s="rag"><span>RAG</span><i>18</i></a></li>
+<li><a href="#vectordb" data-s="vectordb"><span>Vector DBs</span><i>16</i></a></li>
+<li><a href="#llmdeep" data-s="llmdeep"><span>LLM training</span><i>9</i></a></li>
+<li><a href="#nlp" data-s="nlp"><span>NLP</span><i>18</i></a></li>
+</ul>
+<p class="side-g">Core ML</p>
+<ul>
+<li><a href="#fundamentals" data-s="fundamentals"><span>Fundamentals</span><i>9</i></a></li>
+<li><a href="#metrics" data-s="metrics"><span>Metrics</span><i>9</i></a></li>
+<li><a href="#optimisation" data-s="optimisation"><span>Optimisation</span><i>7</i></a></li>
+<li><a href="#classical" data-s="classical"><span>Classical ML</span><i>13</i></a></li>
+<li><a href="#stats" data-s="stats"><span>Probability &amp; stats</span><i>8</i></a></li>
+<li><a href="#data" data-s="data"><span>Data &amp; features</span><i>12</i></a></li>
+<li><a href="#boosting" data-s="boosting"><span>Boosting</span><i>14</i></a></li>
+<li><a href="#gpr" data-s="gpr"><span>Gaussian processes</span><i>10</i></a></li>
+</ul>
+<p class="side-g">Vision & medical</p>
+<ul>
+<li><a href="#cnn" data-s="cnn"><span>CNNs</span><i>6</i></a></li>
+<li><a href="#vit" data-s="vit"><span>ViT &amp; STN</span><i>10</i></a></li>
+<li><a href="#generative" data-s="generative"><span>Generative</span><i>4</i></a></li>
+<li><a href="#ssl" data-s="ssl"><span>Self-supervised</span><i>3</i></a></li>
+<li><a href="#registration" data-s="registration"><span>Registration</span><i>5</i></a></li>
+<li><a href="#medical" data-s="medical"><span>Medical traps</span><i>3</i></a></li>
+<li><a href="#foundation" data-s="foundation"><span>VLM &amp; VLA</span><i>13</i></a></li>
+</ul>
+<p class="side-g">Sequences & signals</p>
+<ul>
+<li><a href="#seq" data-s="seq"><span>RNNs &amp; seq</span><i>5</i></a></li>
+<li><a href="#timeseries" data-s="timeseries"><span>Time series</span><i>14</i></a></li>
+<li><a href="#dsp" data-s="dsp"><span>Signal processing</span><i>14</i></a></li>
+</ul>
+<p class="side-g">Applied & industrial</p>
+<ul>
+<li><a href="#uncertainty" data-s="uncertainty"><span>Uncertainty</span><i>14</i></a></li>
+<li><a href="#inference" data-s="inference"><span>Inference</span><i>14</i></a></li>
+<li><a href="#fusion" data-s="fusion"><span>Sensor fusion</span><i>13</i></a></li>
+<li><a href="#control" data-s="control"><span>Control &amp; drift</span><i>15</i></a></li>
+<li><a href="#rl" data-s="rl"><span>RL basics</span><i>5</i></a></li>
+<li><a href="#imitation" data-s="imitation"><span>Imitation &amp; RL</span><i>15</i></a></li>
+<li><a href="#efficiency" data-s="efficiency"><span>Scale &amp; efficiency</span><i>6</i></a></li>
+<li><a href="#recsys" data-s="recsys"><span>RecSys</span><i>4</i></a></li>
+</ul>
+<p class="side-g">Production</p>
+<ul>
+<li><a href="#mlops" data-s="mlops"><span>MLOps</span><i>7</i></a></li>
+<li><a href="#design" data-s="design"><span>System design</span><i>4</i></a></li>
+<li><a href="#responsible" data-s="responsible"><span>Responsible AI</span><i>4</i></a></li>
+</ul>
+  </nav>
+</aside>
+<div class="side-scrim" id="sidescrim" hidden></div>
 <header class="topbar">
   <div class="wrap">
     <div class="topline">
       <a class="home" href="https://caffineaddic.github.io/" title="Saumya Roy — portfolio">SR</a><div class="mark">ML Playbook <span>/</span> say it out loud</div>
       <div class="tools">
+        <button class="btn side-open" id="sideopen" type="button" aria-controls="side" aria-expanded="false">Topics</button>
         <button class="btn" id="mode" aria-pressed="false">Reveal all</button>
         <button class="btn" id="filter" aria-pressed="false">Marked only</button>
       </div>
     </div>
-    <nav class="chips">
-      <a href="#stuck">When stuck</a>
-      <a href="#basics">Ground floor</a>
-      <a href="#attention">Attention</a>
-      <a href="#transformer">Transformer</a>
-      <a href="#agents">LLMs &amp; agents</a>
-      <a href="#rag">RAG</a>
-      <a href="#vectordb">Vector DBs</a>
-      <a href="#fundamentals">Fundamentals</a>
-      <a href="#metrics">Metrics</a>
-      <a href="#optimisation">Optimisation</a>
-      <a href="#cnn">CNNs</a>
-      <a href="#vit">ViT &amp; STN</a>
-      <a href="#generative">Generative</a>
-      <a href="#ssl">Self-supervised</a>
-      <a href="#registration">Registration</a>
-      <a href="#medical">Medical traps</a>
-      <a href="#classical">Classical ML</a>
-      <a href="#stats">Probability & stats</a>
-      <a href="#data">Data & features</a>
-      <a href="#nlp">NLP</a>
-      <a href="#seq">RNNs & seq</a>
-      <a href="#llmdeep">LLM training</a>
-      <a href="#efficiency">Scale & efficiency</a>
-      <a href="#recsys">RecSys</a>
-      <a href="#rl">RL basics</a>
-      <a href="#mlops">MLOps</a>
-      <a href="#design">System design</a>
-      <a href="#responsible">Responsible AI</a>
-      <a href="#boosting">Boosting</a>
-      <a href="#dsp">Signal processing</a>
-      <a href="#control">Control & drift</a>
-      <a href="#gpr">Gaussian processes</a>
-      <a href="#uncertainty">Uncertainty</a>
-      <a href="#timeseries">Time series</a>
-      <a href="#inference">Inference</a>
-      <a href="#fusion">Sensor fusion</a>
-      <a href="#foundation">VLM & VLA</a>
-      <a href="#imitation">Imitation & RL</a>
-    </nav>
   </div>
 </header>
 
@@ -3044,5 +3110,44 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 
 <!-- GoatCounter analytics — privacy-friendly, no cookies -->
 <script data-goatcounter="https://saumyaroy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script>
+/* topic sidebar: drawer on small screens, active section highlight, filter */
+(function(){var h=document.querySelector('.topbar');function f(){document.documentElement.style.setProperty('--topbar-h',(h.offsetHeight+8)+'px')}f();addEventListener('resize',f)})();
+(function(){
+  var side=document.getElementById('side'),open=document.getElementById('sideopen'),
+      close=document.getElementById('sideclose'),scrim=document.getElementById('sidescrim'),
+      q=document.getElementById('sideq'),links=[].slice.call(side.querySelectorAll('a[data-s]'));
+  var wide=matchMedia('(min-width:1100px)');
+  function set(o){side.classList.toggle('open',o);scrim.hidden=!o;open.setAttribute('aria-expanded',o);
+    if(o){q.focus({preventScroll:true});}}
+  open.addEventListener('click',function(){set(true)});
+  close.addEventListener('click',function(){set(false)});
+  scrim.addEventListener('click',function(){set(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&side.classList.contains('open')){set(false);open.focus();}});
+  links.forEach(function(a){a.addEventListener('click',function(){if(!wide.matches)set(false)})});
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase();
+    side.querySelectorAll('ul').forEach(function(ul){
+      var any=false;
+      ul.querySelectorAll('li').forEach(function(li){var m=!v||li.textContent.toLowerCase().indexOf(v)>-1;li.classList.toggle('hide',!m);if(m)any=true;});
+      ul.previousElementSibling.classList.toggle('hide',!any);
+    });
+  });
+  q.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){var f=links.filter(function(a){return !a.parentNode.classList.contains('hide')})[0];if(f){f.click();location.hash=f.getAttribute('href');}}
+  });
+  var byId={};links.forEach(function(a){byId[a.dataset.s]=a});
+  var cur=null;
+  function mark(id){if(id===cur||!byId[id])return;if(cur&&byId[cur])byId[cur].classList.remove('on');cur=id;var a=byId[id];a.classList.add('on');
+    var nav=document.getElementById('sidenav'),r=a.getBoundingClientRect(),nr=nav.getBoundingClientRect();
+    if(r.top<nr.top+20||r.bottom>nr.bottom-20)nav.scrollTop+=r.top-nr.top-nr.height/2;}
+  var secs=[].slice.call(document.querySelectorAll('section[id]')).filter(function(x){return byId[x.id]});
+  function onScroll(){var y=innerHeight*0.3,best=secs[0];
+    for(var i=0;i<secs.length;i++){if(secs[i].getBoundingClientRect().top<=y)best=secs[i];else break;}
+    if(best)mark(best.id);}
+  var t=null;addEventListener('scroll',function(){if(t)return;t=requestAnimationFrame(function(){t=null;onScroll()})},{passive:true});
+  onScroll();
+})();
+</script>
 </body>
 </html>
