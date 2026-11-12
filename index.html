@@ -83,7 +83,7 @@ body.hide-done .qa.done{display:none}
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://caffineaddic.github.io/ml-interview-playbook/">
 <meta property="og:title" content="ML Interview Playbook — answers you can say out loud">
-<meta property="og:description" content="368 ML interview questions with spoken-style answers and 106 trick questions. Transformers, LLMs, RAG, vector databases, gradient boosting, signal processing, Gaussian processes, NLP, sensor fusion, time series, uncertainty, classical ML, MLOps, system design. Free and open source.">
+<meta property="og:description" content="416 ML interview questions with spoken-style answers and 119 trick questions. Transformers, LLMs, RAG, vector databases, gradient boosting, signal processing, Gaussian processes, NLP, sensor fusion, time series, uncertainty, classical ML, MLOps, system design, benchmark design. Free and open source.">
 <meta property="og:image" content="https://caffineaddic.github.io/ml-interview-playbook/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
@@ -309,7 +309,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <body>
 <aside class="side" id="side" aria-label="Topics">
   <div class="side-head">
-    <span class="side-t">Topics</span><span class="side-n">38 · 386 cards</span>
+    <span class="side-t">Topics</span><span class="side-n">40 · 416 cards</span>
     <button class="side-x" id="sideclose" type="button" aria-label="Close topics">×</button>
   </div>
   <div class="side-prog"><div class="side-bar"><i id="sidebarfill"></i></div><span id="sideprog">0%</span></div>
@@ -338,6 +338,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <li><a href="#classical" data-s="classical"><span>Classical ML</span><i>13</i></a></li>
 <li><a href="#stats" data-s="stats"><span>Probability &amp; stats</span><i>8</i></a></li>
 <li><a href="#data" data-s="data"><span>Data &amp; features</span><i>14</i></a></li>
+<li><a href="#trees" data-s="trees"><span>Decision trees</span><i>18</i></a></li>
 <li><a href="#boosting" data-s="boosting"><span>Boosting</span><i>14</i></a></li>
 <li><a href="#gpr" data-s="gpr"><span>Gaussian processes</span><i>10</i></a></li>
 </ul>
@@ -372,6 +373,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <ul>
 <li><a href="#mlops" data-s="mlops"><span>MLOps</span><i>7</i></a></li>
 <li><a href="#design" data-s="design"><span>System design</span><i>4</i></a></li>
+<li><a href="#benchmarks" data-s="benchmarks"><span>Benchmark design</span><i>12</i></a></li>
 <li><a href="#responsible" data-s="responsible"><span>Responsible AI</span><i>4</i></a></li>
 </ul>
   </nav>
@@ -748,7 +750,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
     <tr><td><strong>Supervised</strong></td><td>Human-provided labels for every example.</td></tr>
     <tr><td><strong>Unsupervised</strong></td><td>No labels at all — clustering, density estimation.</td></tr>
     <tr><td><strong>Self-supervised</strong></td><td>Labels manufactured from the data itself (predict the masked part, match two views). Then fine-tune on a small labelled set.</td></tr>
-    <tr><td><strong>Semi-supervised</strong></td><td>A small labelled set plus a large unlabelled one, used together. <em>This is the family your own registration work sits in.</em></td></tr>
+    <tr><td><strong>Semi-supervised</strong></td><td>A small labelled set plus a large unlabelled one, used together. <em>Common in medical imaging, where labels are expensive.</em></td></tr>
     <tr><td><strong>Reinforcement</strong></td><td>No labels, only a reward signal from acting in an environment.</td></tr>
   </table></div>
 
@@ -2104,7 +2106,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   </div></details>
 
   <h3>Spatial transformer networks</h3>
-  <p class="noqa">Jaderberg et al., 2015. <strong>This is the module that makes your own work possible</strong>,
+  <p class="noqa">Jaderberg et al., 2015. <strong>This is the module that makes learned registration possible</strong>,
   so be able to explain it precisely — it's the piece that turns registration into something a network can be
   trained on end to end.</p>
 
@@ -2243,7 +2245,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 
 <!-- ============ GENERATIVE ============ -->
 <section id="generative"><div class="wrap">
-  <p class="eyebrow">For the registration and synthesis conversation</p>
+  <p class="eyebrow">Sampling, likelihood and synthesis</p>
   <h2>Generative models</h2>
 
   <figure>
@@ -2417,7 +2419,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 
 <!-- ============ REGISTRATION ============ -->
 <section id="registration"><div class="wrap">
-  <p class="eyebrow">Your own territory — be exact</p>
+  <p class="eyebrow">Aligning images — be exact</p>
   <h2>Registration</h2>
 
   <figure>
@@ -2535,16 +2537,16 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
   </div></details>
 
   <div class="note key">
-    <div class="lbl">Your own contribution, in one line</div>
+    <div class="lbl">Synthetic vs real training pairs, in one line</div>
     <p>Synthetic pairs give exact ground-truth correspondence, which real pairs never have; real pairs keep the
     model honest about actual anatomical variation. Neither alone is sufficient.</p>
   </div>
 
   <div class="note">
     <div class="lbl">Be ready for</div>
-    <p>"How exactly did you generate the synthetic supervision?" — the most likely question and the most
-    interesting part. Have the real answer: how the fields were produced, why they were plausible, and the
-    weakness if there is one. If they were smoother than real anatomical variation, <strong>say so
+    <p>If you have trained on synthetic deformations: "How exactly was the synthetic supervision generated?" — the
+    most likely follow-up and the most interesting part. Know how the fields were produced, why they were plausible,
+    and the weakness if there is one. If they were smoother than real anatomical variation, <strong>say so
     yourself</strong>. Volunteering it is worth more than a clean story.</p>
   </div>
 </div></section>
@@ -2826,6 +2828,103 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa trick"><summary><span class="tag">Trick</span> Should you start with the most powerful model?</summary><div class="ans"><p><strong>No — start with a simple baseline.</strong> It sets the bar, exposes data problems early, and is often good enough. Interviewers listen for this explicitly.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
+<!-- ============ BENCHMARKS ============ -->
+<section id="benchmarks"><div class="wrap">
+  <p class="eyebrow">Measuring what matters</p>
+  <h2>Benchmark design</h2>
+
+  <p>Anyone can train a model. The benchmark is what tells you whether it works — and most benchmarks are broken. These cards are about designing evaluation that catches lies before production does.</p>
+
+  <h3>Questions</h3>
+  <details class="qa"><summary>How would you design a benchmark for a new ML task?</summary>
+  <div class="ans">
+    <p>I start from <strong>what success means to the people using it</strong> — a clinical decision, a maintenance saving — not from the loss function. Then I pick metrics that capture that, even if they're harder to compute than the easy ones.</p>
+    <p>Next, the evaluation data: split at the entity level, stratified along the axes where the model has to generalise, with deliberate edge cases. Then <strong>baselines</strong> — a trivial one and the current method — so every number has something to be compared against.</p>
+    <p>A classic cautionary example: adapting a language model to clinical notes can cut perplexity several-fold while exact-match accuracy on clinical questions barely moves. A headline metric without task-level evaluation and failure analysis tells the wrong story.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>What makes a good evaluation dataset?</summary>
+  <div class="ans">
+    <p>A few things I insist on:</p>
+    <ul><li><strong>Entity-level splits</strong> — by patient, vehicle or site, never by slice or window, or the model is tested on things it has effectively seen.</li><li><strong>Stratification</strong> along the axes where generalisation matters: site, scanner, protocol, demographics, operating condition.</li><li><strong>Hard and edge cases</strong> on purpose, not just whatever the random sample contained.</li><li><strong>Multiple institutions</strong> if at all possible — single-site benchmarks overstate performance.</li><li><strong>Enough samples</strong> that the confidence interval is narrower than the differences you want to detect.</li></ul>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>How do you make model comparisons statistically rigorous?</summary>
+  <div class="ans">
+    <p>Run each configuration with several seeds — three to five — and report <strong>mean ± standard deviation</strong>, not one lucky run. Compare models <strong>paired</strong> on the same test cases: a paired t-test if differences look normal, <strong>Wilcoxon signed-rank</strong> if not, or a paired bootstrap over test examples.</p>
+    <p>Report <strong>confidence intervals</strong>, not just p-values, and correct for multiple comparisons with <strong>Holm</strong> or Bonferroni when you test many models or metrics. Above all, look at the <strong>effect size</strong>: a significant 0.2-point gain may not matter to anyone.</p>
+    <p>One subtlety: with only five seeds, a two-sided Wilcoxon test can never reach p &lt; 0.05 — the smallest possible p is 0.0625. So pairing over test examples, or a bootstrap, is usually the more useful test.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa trick"><summary><span class="tag">Trick</span> Your model gets 0.92 Dice, but clinicians reject 30% of the contours. Is the benchmark wrong?</summary>
+  <div class="ans">
+    <p><strong>The metric is wrong for what matters.</strong> Dice measures volume overlap, which is dominated by the bulk of the structure, so it barely notices boundary errors — and boundaries are exactly what clinicians correct.</p>
+    <p>I'd add <strong>surface-distance metrics</strong> such as the 95th-percentile Hausdorff distance and average surface distance, and measure <strong>clinician editing time</strong>: a model with lower Dice can be more useful if edits take two minutes instead of twenty. And I'd stratify by structure — a 0.92 average can hide 0.70 on the one organ that matters most.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>How do you do failure analysis on a benchmark?</summary>
+  <div class="ans">
+    <p>Break the aggregate apart. I look at results by <strong>subgroup</strong> — anatomy, site, difficulty, operating condition — and at <strong>where</strong> errors cluster, for example error heat-maps over the image or the input space, and which specific classes get confused.</p>
+    <p>Then compare <strong>failure modes across models</strong>: if they fail on the same cases, the problem is likely the data or labels; if differently, an ensemble may help. Finally, I read the <strong>worst N cases</strong> myself. Systematic errors tell you far more than one more decimal of the average.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa trick"><summary><span class="tag">Trick</span> Is a higher score on a public leaderboard always better?</summary>
+  <div class="ans">
+    <p><strong>No.</strong> Several things inflate leaderboard scores:</p>
+    <ul><li><strong>Test-set overfitting</strong> through repeated submissions and tuning.</li><li><strong>Distribution mismatch</strong> — the benchmark isn't your production data.</li><li><strong>Metric gaming</strong> — optimising Dice while boundary quality gets worse.</li><li><strong>Contamination</strong> — the training data overlaps the test set, a real problem for LLMs trained on the web.</li></ul>
+    <p>It's Goodhart's law: when a measure becomes a target, it stops being a good measure. Treat leaderboards as a filter, then evaluate on your own data.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>How do you benchmark for domain shift and generalisation?</summary>
+  <div class="ans">
+    <p>Hold out <strong>entire sites or institutions</strong> as an external test set, and use <strong>leave-one-site-out</strong> cross-validation to see how much performance varies. The key number is the <strong>drop from internal to external</strong> performance.</p>
+    <p>Test-time augmentation is a useful diagnostic for sensitivity to acquisition changes, and in production I'd keep monitoring metrics per site. A model validated only on its training distribution tells you nothing about deployment.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>How would you benchmark an LLM-based agent?</summary>
+  <div class="ans">
+    <p>The headline is <strong>task completion rate</strong> — binary success against objective criteria — broken down by complexity: simple tasks of 5–10 steps, medium of 10–50, complex of 50–200 or more. Underneath that I measure:</p>
+    <ul><li><strong>Tool-call accuracy</strong>: right tool, right parameters, correct reading of the result.</li><li><strong>Error recovery</strong>: inject failures and see whether it recovers.</li><li><strong>Context retention</strong>: does a constraint given at step 1 still hold at step 50?</li><li><strong>Cost per successful completion</strong>, not per call.</li></ul>
+    <p>Agents are non-deterministic, so every task runs three to five times and I report the spread.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>Which existing agent benchmarks should you know?</summary>
+  <div class="ans">
+    <ul><li><strong>SWE-bench</strong> (Verified, Pro): coding agents resolve real GitHub issues, judged by running the repository's tests.</li><li><strong>WebArena</strong>: realistic tasks in self-hosted websites through a browser.</li><li><strong>τ-bench</strong>: customer-service conversations where the agent must follow domain rules and policies.</li><li><strong>AgentBench</strong>: many environments, broad but shallow.</li></ul>
+    <p>The key point is that each reflects a specific task distribution, tool set and harness, so scores don't transfer directly to your deployment. You still need a custom evaluation on tasks that look like your production traffic.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa trick"><summary><span class="tag">Trick</span> Can you evaluate an agent by scoring each of its responses?</summary>
+  <div class="ans">
+    <p><strong>No — agents succeed or fail at the task level.</strong> A brilliant intermediate answer followed by one wrong tool call is still a failed task.</p>
+    <p>Evaluate the <strong>whole execution trace</strong>: is state consistent across steps, does it stop at the right time — not too early, not too late — does it take unnecessary steps, and does it report its own success or failure correctly? For qualitative judgement, an LLM judge reading full traces works, ideally as a <strong>pairwise comparison</strong> of two candidate models on the same task.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>How do you build a minimum viable evaluation set for an agent?</summary>
+  <div class="ans">
+    <ul><li><strong>20–30 tasks</strong> taken from production logs, or simulated from the inputs you expect.</li><li><strong>5–10 of them with injected failures</strong> at specific steps — a tool error, a missing file, a contradictory instruction.</li><li>Each task run <strong>at least three times</strong>.</li><li>Scored at the <strong>task level</strong>; step-level scores are for debugging only.</li><li><strong>Cost per completed task</strong> recorded for every candidate model.</li></ul>
+    <p>Report success-rate distributions, not single point estimates — with 30 tasks, one flip is more than three percentage points.</p>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+  <details class="qa"><summary>What failure modes are specific to agents?</summary>
+  <div class="ans">
+    <ul><li><strong>Hallucinated actions</strong>: calling tools that don't exist, or with wrong parameters.</li><li><strong>Loops</strong>: repeating the same failed action.</li><li><strong>Context saturation</strong>: losing early constraints as the trace grows.</li><li><strong>Termination failures</strong>: stopping early, or carrying on after the task is done.</li><li><strong>Cascading errors</strong>: one wrong tool output poisons every later step.</li><li><strong>Happy-path bias</strong> in the evaluation itself: testing only easy paths, and missing the failures that matter most in production.</li></ul>
+    <button class="star">Mark for review</button>
+  </div></details>
+
+</div></section>
+
 <section id="responsible"><div class="wrap">
   <p class="eyebrow">Increasingly asked</p>
   <h2>Fairness, interpretability and safety</h2>
@@ -2839,6 +2938,35 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>Name some fairness definitions.</summary><div class="ans"><p>Demographic parity (equal positive rate across groups), equalised odds (equal TPR and FPR), calibration within groups. Except in trivial cases <strong>they can't all hold at once</strong> — you have to choose.</p><button class="star">Mark for review</button></div></details>
 <details class="qa trick"><summary><span class="tag">Trick</span> Does removing the sensitive attribute make a model fair?</summary><div class="ans"><p><strong>No.</strong> Proxies (postcode, name, purchase history) reintroduce it. You need the attribute to even <em>measure</em> fairness.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is calibration and how do you fix it?</summary><div class="ans"><p>A calibrated model's 0.8 predictions are right 80% of the time. Check with a reliability diagram / ECE. Fix post hoc with temperature scaling, Platt scaling, or isotonic regression on held-out data.</p><button class="star">Mark for review</button></div></details>
+</div></section>
+
+<section id="trees"><div class="wrap">
+<p class="eyebrow">Where boosting and forests start</p>
+<h2>Decision trees and random forests</h2>
+<div class="say"><div class="lbl">The spoken answer — about thirty seconds</div><p>A decision tree splits the data greedily: at each node it tries every feature and threshold and keeps the one that most reduces impurity — Gini or entropy for classification, variance for regression. The leaves are boxes in feature space that predict a majority class or a mean, so trees need no scaling but can't extrapolate beyond the training range. A single deep tree overfits and is unstable, so I limit depth and minimum leaf size or prune it. Random forests fix the variance by averaging many deep trees trained on bootstrap samples with a random subset of features at each split; ExtraTrees go further by also randomising thresholds.</p></div>
+<figure>
+<svg viewBox="0 0 720 266" role="img" aria-label="Decision tree partitions feature space; Gini and entropy curves"><defs><marker id="mtr" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--ink-3)"/></marker></defs><text x="20" y="20" class="s-t-a" text-anchor="start">THE TREE CUTS FEATURE SPACE INTO BOXES</text><rect x="30" y="34" width="200" height="170" class="s-box" style="fill:var(--surface)"/><rect x="140.0" y="34" width="90.0" height="110.5" class="s-box-w" opacity=".55"/><rect x="30" y="34" width="110.0" height="68.0" class="s-box-w" opacity=".55"/><path d="M140.0 34 V204" stroke="var(--ink-2)" stroke-width="2"/><path d="M30 102.0 H140.0" stroke="var(--ink-2)" stroke-width="1.6" stroke-dasharray="5 3"/><path d="M140.0 144.5 H230" stroke="var(--ink-2)" stroke-width="1.6" stroke-dasharray="5 3"/><circle cx="121" cy="110" r="3.4" fill="var(--accent)"/><circle cx="124" cy="118" r="3.4" fill="var(--accent)"/><circle cx="71" cy="117" r="3.4" fill="var(--accent)"/><circle cx="185" cy="183" r="3.4" fill="var(--accent)"/><circle cx="53" cy="70" r="3.4" fill="var(--warn)"/><circle cx="44" cy="43" r="3.4" fill="var(--warn)"/><circle cx="159" cy="101" r="3.4" fill="var(--warn)"/><circle cx="39" cy="115" r="3.4" fill="var(--warn)"/><circle cx="72" cy="160" r="3.4" fill="var(--warn)"/><circle cx="123" cy="128" r="3.4" fill="var(--accent)"/><circle cx="134" cy="97" r="3.4" fill="var(--warn)"/><circle cx="161" cy="126" r="3.4" fill="var(--warn)"/><circle cx="224" cy="41" r="3.4" fill="var(--warn)"/><circle cx="169" cy="148" r="3.4" fill="var(--accent)"/><circle cx="90" cy="187" r="3.4" fill="var(--accent)"/><circle cx="111" cy="64" r="3.4" fill="var(--warn)"/><circle cx="216" cy="64" r="3.4" fill="var(--accent)"/><circle cx="75" cy="54" r="3.4" fill="var(--warn)"/><circle cx="220" cy="135" r="3.4" fill="var(--accent)"/><circle cx="154" cy="75" r="3.4" fill="var(--warn)"/><circle cx="52" cy="145" r="3.4" fill="var(--accent)"/><circle cx="179" cy="179" r="3.4" fill="var(--accent)"/><circle cx="55" cy="189" r="3.4" fill="var(--accent)"/><circle cx="69" cy="110" r="3.4" fill="var(--accent)"/><circle cx="72" cy="82" r="3.4" fill="var(--warn)"/><circle cx="157" cy="180" r="3.4" fill="var(--accent)"/><circle cx="76" cy="155" r="3.4" fill="var(--accent)"/><circle cx="187" cy="150" r="3.4" fill="var(--accent)"/><circle cx="76" cy="136" r="3.4" fill="var(--accent)"/><circle cx="157" cy="182" r="3.4" fill="var(--accent)"/><circle cx="76" cy="157" r="3.4" fill="var(--accent)"/><circle cx="98" cy="151" r="3.4" fill="var(--warn)"/><circle cx="53" cy="106" r="3.4" fill="var(--accent)"/><circle cx="149" cy="139" r="3.4" fill="var(--warn)"/><circle cx="216" cy="122" r="3.4" fill="var(--warn)"/><circle cx="199" cy="169" r="3.4" fill="var(--accent)"/><circle cx="207" cy="69" r="3.4" fill="var(--warn)"/><circle cx="72" cy="81" r="3.4" fill="var(--warn)"/><circle cx="73" cy="48" r="3.4" fill="var(--warn)"/><circle cx="149" cy="131" r="3.4" fill="var(--warn)"/><circle cx="43" cy="46" r="3.4" fill="var(--warn)"/><circle cx="168" cy="157" r="3.4" fill="var(--accent)"/><circle cx="148" cy="152" r="3.4" fill="var(--accent)"/><circle cx="171" cy="187" r="3.4" fill="var(--accent)"/><circle cx="141" cy="63" r="3.4" fill="var(--warn)"/><circle cx="89" cy="53" r="3.4" fill="var(--warn)"/><text x="130.0" y="220" class="s-t-s" text-anchor="middle">exhaust temperature →</text><text transform="rotate(-90 22 119)" x="22" y="119.0" class="s-t-s" text-anchor="middle">vibration →</text><rect x="300" y="40" width="130" height="28" rx="5" class="s-box-a"/><text x="365.0" y="58.0" class="s-t-m" text-anchor="middle">temp ≤ 0.55 ?</text><path d="M335 70 L305 100 M395 70 L440 100" class="s-arrow" marker-end="url(#mtr)"/><text x="296" y="82" class="s-t-m" text-anchor="end">yes</text><text x="436" y="82" class="s-t-m" text-anchor="start">no</text><rect x="250" y="102" width="110" height="28" rx="5" class="s-box-a"/><text x="305.0" y="120.0" class="s-t-m" text-anchor="middle">vib ≤ 0.6 ?</text><rect x="392" y="102" width="110" height="28" rx="5" class="s-box-a"/><text x="447.0" y="120.0" class="s-t-m" text-anchor="middle">vib ≤ 0.35 ?</text><path d="M291 132 L271 160 M319 132 L339 160" class="s-arrow" marker-end="url(#mtr)"/><rect x="243" y="162" width="54" height="24" rx="5" class="s-box"/><text x="270.0" y="178.0" class="s-t-m" text-anchor="middle">ok</text><rect x="313" y="162" width="54" height="24" rx="5" class="s-box-w"/><text x="340.0" y="178.0" class="s-t-m" text-anchor="middle">fault</text><path d="M433 132 L413 160 M461 132 L481 160" class="s-arrow" marker-end="url(#mtr)"/><rect x="385" y="162" width="54" height="24" rx="5" class="s-box"/><text x="412.0" y="178.0" class="s-t-m" text-anchor="middle">ok</text><rect x="455" y="162" width="54" height="24" rx="5" class="s-box-w"/><text x="482.0" y="178.0" class="s-t-m" text-anchor="middle">fault</text><text x="370" y="210" class="s-t-s" text-anchor="middle">4 leaves = the 4 boxes on the left</text><text x="530" y="20" class="s-t-a" text-anchor="start">IMPURITY OF A TWO-CLASS NODE</text><path d="M540 160 H700 M540 160 V40" class="s-line"/><polyline points="540.0,160.0 541.6,150.3 543.2,143.0 544.8,136.7 546.4,130.9 548.0,125.6 549.6,120.7 551.2,116.1 552.8,111.7 554.4,107.6 556.0,103.7 557.6,100.0 559.2,96.5 560.8,93.1 562.4,89.9 564.0,86.8 565.6,83.9 567.2,81.1 568.8,78.4 570.4,75.8 572.0,73.4 573.6,71.0 575.2,68.8 576.8,66.6 578.4,64.6 580.0,62.6 581.6,60.8 583.2,59.0 584.8,57.3 586.4,55.8 588.0,54.2 589.6,52.8 591.2,51.5 592.8,50.2 594.4,49.0 596.0,47.9 597.6,46.9 599.2,45.9 600.8,45.0 602.4,44.2 604.0,43.5 605.6,42.8 607.2,42.2 608.8,41.7 610.4,41.2 612.0,40.9 613.6,40.6 615.2,40.3 616.8,40.1 618.4,40.0 620.0,40.0 621.6,40.0 623.2,40.1 624.8,40.3 626.4,40.6 628.0,40.9 629.6,41.2 631.2,41.7 632.8,42.2 634.4,42.8 636.0,43.5 637.6,44.2 639.2,45.0 640.8,45.9 642.4,46.9 644.0,47.9 645.6,49.0 647.2,50.2 648.8,51.5 650.4,52.8 652.0,54.2 653.6,55.8 655.2,57.3 656.8,59.0 658.4,60.8 660.0,62.6 661.6,64.6 663.2,66.6 664.8,68.8 666.4,71.0 668.0,73.4 669.6,75.8 671.2,78.4 672.8,81.1 674.4,83.9 676.0,86.8 677.6,89.9 679.2,93.1 680.8,96.5 682.4,100.0 684.0,103.7 685.6,107.6 687.2,111.7 688.8,116.1 690.4,120.7 692.0,125.6 693.6,130.9 695.2,136.7 696.8,143.0 698.4,150.3 700.0,160.0" fill="none" stroke="var(--accent)" stroke-width="2"/><polyline points="540.0,160.0 541.6,157.6 543.2,155.3 544.8,153.0 546.4,150.8 548.0,148.6 549.6,146.5 551.2,144.4 552.8,142.3 554.4,140.3 556.0,138.4 557.6,136.5 559.2,134.7 560.8,132.9 562.4,131.1 564.0,129.4 565.6,127.7 567.2,126.1 568.8,124.6 570.4,123.1 572.0,121.6 573.6,120.2 575.2,118.8 576.8,117.5 578.4,116.2 580.0,115.0 581.6,113.8 583.2,112.7 584.8,111.6 586.4,110.6 588.0,109.6 589.6,108.7 591.2,107.8 592.8,106.9 594.4,106.1 596.0,105.4 597.6,104.7 599.2,104.1 600.8,103.5 602.4,102.9 604.0,102.4 605.6,101.9 607.2,101.5 608.8,101.2 610.4,100.9 612.0,100.6 613.6,100.4 615.2,100.2 616.8,100.1 618.4,100.0 620.0,100.0 621.6,100.0 623.2,100.1 624.8,100.2 626.4,100.4 628.0,100.6 629.6,100.9 631.2,101.2 632.8,101.5 634.4,101.9 636.0,102.4 637.6,102.9 639.2,103.5 640.8,104.1 642.4,104.7 644.0,105.4 645.6,106.1 647.2,106.9 648.8,107.8 650.4,108.7 652.0,109.6 653.6,110.6 655.2,111.6 656.8,112.7 658.4,113.8 660.0,115.0 661.6,116.2 663.2,117.5 664.8,118.8 666.4,120.2 668.0,121.6 669.6,123.1 671.2,124.6 672.8,126.1 674.4,127.7 676.0,129.4 677.6,131.1 679.2,132.9 680.8,134.7 682.4,136.5 684.0,138.4 685.6,140.3 687.2,142.3 688.8,144.4 690.4,146.5 692.0,148.6 693.6,150.8 695.2,153.0 696.8,155.3 698.4,157.6 700.0,160.0" fill="none" stroke="var(--warn)" stroke-width="2"/><text x="620.0" y="36" class="s-t-s" text-anchor="middle" style="fill:var(--accent)">entropy (max 1 bit)</text><text x="620.0" y="146" class="s-t-s" text-anchor="middle" style="fill:var(--warn)">Gini (max 0.5)</text><text x="540" y="174" class="s-t-m" text-anchor="start">0</text><text x="700" y="174" class="s-t-m" text-anchor="end">1</text><text x="620.0" y="188" class="s-t-s" text-anchor="middle">share of class A in node</text><rect x="530" y="200" width="180" height="56" rx="6" class="s-box" style="fill:var(--accent-soft);stroke:var(--accent);stroke-opacity:.35"/><text x="542" y="220" class="s-t" text-anchor="start" style="font-weight:600">Pick the split that most</text><text x="542" y="237" class="s-t-s" text-anchor="start">reduces weighted impurity.</text><text x="542" y="251" class="s-t-s" text-anchor="start">Same shape, same choices.</text></svg>
+<figcaption><b>A tree is a set of axis-aligned cuts.</b> Each question splits one feature at one threshold; the leaves are boxes in feature space, each predicting its majority class (or mean value). Gini and entropy both peak for a 50/50 node and hit zero for a pure one, so they almost always choose the same split.</figcaption>
+</figure>
+<h3>Questions</h3>
+<details class="qa"><summary>How does a decision tree choose each split?</summary><div class="ans"><p>Greedily. At a node it tries every feature and every candidate threshold (midpoints between sorted values), computes the impurity of the two children weighted by their size, and keeps the split with the largest drop in impurity. Then it recurses on each child until a stopping rule. It never revisits earlier splits, so the result is good, not optimal — finding the optimal tree is NP-hard.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Gini impurity vs entropy — formulas and difference?</summary><div class="ans"><p><strong>Gini</strong> = 1 − Σ pₖ² : the chance two random samples from the node have different labels. <strong>Entropy</strong> = −Σ pₖ log₂ pₖ : bits needed to encode a label. For a 50/50 node Gini is 0.5 and entropy is 1; for a pure node both are 0. They pick the same split in the vast majority of cases; Gini is slightly cheaper (no logarithm), which is why it's the scikit-learn default.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Work out an information gain.</summary><div class="ans"><p>Parent: 10 samples, 5 fault and 5 ok → entropy 1.0. Split into left 4 (all ok, entropy 0) and right 6 (5 fault, 1 ok, entropy ≈ 0.65). Weighted child entropy = 0.4·0 + 0.6·0.65 ≈ 0.39. <strong>Information gain ≈ 1.0 − 0.39 = 0.61 bits.</strong> Being able to do this by hand is a common interview check.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does it matter much whether you use Gini or entropy?</summary><div class="ans"><p><strong>Rarely.</strong> The curves have the same shape and almost always rank splits the same way. If an interviewer pushes, the honest answer is that tree depth and minimum leaf size matter far more than the impurity measure.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How does a regression tree work?</summary><div class="ans"><p>The same greedy splitting, but impurity is the <strong>variance</strong> (mean squared error) of the target in a node, and each leaf predicts the mean of its training targets (or the median with an absolute-error criterion). The result is a piecewise-constant function — a staircase.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Can a tree predict a value outside the range it was trained on?</summary><div class="ans"><p><strong>No.</strong> Every leaf predicts an average of training targets, so predictions are capped at the training range. If a catalyst degrades further than anything seen in training, a tree-based model keeps predicting the worst value it has seen. Linear terms, physics-based features or a different model are needed where extrapolation matters. This applies to random forests and boosting too.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you stop a tree from overfitting?</summary><div class="ans"><p>Pre-pruning limits growth: <strong>max_depth</strong>, <strong>min_samples_leaf</strong>, min_samples_split, max_leaf_nodes, min_impurity_decrease. Post-pruning grows a full tree then cuts back: <strong>cost-complexity pruning</strong> minimises error + α·(number of leaves), with α (<code>ccp_alpha</code> in scikit-learn) chosen by cross-validation. min_samples_leaf is usually the single most useful knob.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> A fully grown tree reaches 100% training accuracy. Good sign?</summary><div class="ans"><p><strong>No — it's expected and meaningless.</strong> With no limits, a tree keeps splitting until every leaf is pure, memorising noise. Judge it only on validation data.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Why is a single tree considered unstable?</summary><div class="ans"><p>It has high variance: a small change in the data can change the top split, and every split below it changes too, giving a completely different tree. That instability is exactly what averaging many trees (bagging, random forests) exploits.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Can a tree easily learn a diagonal boundary like x₁ > x₂?</summary><div class="ans"><p><strong>Not easily.</strong> Each split is parallel to one axis, so a diagonal boundary needs a long staircase of splits and lots of data. If you suspect such a relationship, add the engineered feature x₁ − x₂ and a single split captures it.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do trees handle categorical features and missing values?</summary><div class="ans"><p>Natively in some implementations (LightGBM, CatBoost, and recent scikit-learn versions can split categories into groups and route missing values to the better side). Otherwise you encode them: ordinal encoding often works well for trees; one-hot encoding a high-cardinality feature tends to hurt, because each binary column carries very little signal per split.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How does a random forest work?</summary><div class="ans"><p>Train many deep trees, each on a <strong>bootstrap sample</strong> of the rows, and at <strong>every split</strong> consider only a random subset of features (typically √p for classification, p/3 or all for regression). Average the predictions (or vote). The feature subsampling decorrelates the trees, so averaging cuts variance far more than plain bagging would.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>Why does decorrelating the trees matter?</summary><div class="ans"><p>The variance of an average of B trees with variance σ² and pairwise correlation ρ is ρσ² + (1−ρ)σ²/B. Adding trees shrinks only the second term; the first stays. Lowering ρ — by restricting features per split — is what lets the forest keep improving.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Does adding more trees to a random forest cause overfitting?</summary><div class="ans"><p><strong>No.</strong> Test error levels off as trees are added; more trees only cost time and memory. That's unlike boosting, where more rounds do eventually overfit, which is why boosting needs early stopping.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>What is out-of-bag error?</summary><div class="ans"><p>Each bootstrap sample leaves out about a third of the rows (the chance a row is never drawn is (1 − 1/n)ⁿ ≈ 37%). Predicting each row using only the trees that didn't see it gives a nearly free validation estimate — no separate hold-out needed. It isn't valid for time series or grouped data, for the same reasons random cross-validation isn't.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>ExtraTrees vs random forest?</summary><div class="ans"><p>Extremely Randomised Trees pick the threshold for each candidate feature <strong>at random</strong> instead of searching for the best one, and by default train on the full dataset rather than bootstrap samples. Each tree is weaker but the trees are less correlated and much faster to build, so the ensemble often matches a random forest with lower variance — a good, cheap member for an ensemble.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Are random forest probabilities well calibrated?</summary><div class="ans"><p><strong>Not usually.</strong> Averaging many trees pulls predictions away from 0 and 1, so true positives often get 0.8 rather than 0.95. If you threshold on probabilities or report them, calibrate on held-out data (isotonic regression or Platt scaling).</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>When would you still use a single decision tree?</summary><div class="ans"><p>When the model must be explained or audited — a depth-3 tree can be read aloud as rules — or as a surrogate that approximates a complex model's behaviour for explanation. Also, because a trained tree is just nested if-statements, it compiles trivially to C for embedded targets.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="boosting"><div class="wrap">
@@ -2862,8 +2990,8 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa"><summary>Stacking vs blending vs voting?</summary><div class="ans"><p><strong>Voting/averaging</strong>: average the models' probabilities, optionally weighted. <strong>Blending</strong>: train a meta-model on predictions for one held-out split. <strong>Stacking</strong>: train it on out-of-fold predictions for every training row, so it uses all the data. Stacking is the most data-efficient; averaging is the hardest to overfit.</p><button class="star">Mark for review</button></div></details>
 <details class="qa trick"><summary><span class="tag">Trick</span> Why must stacking use out-of-fold predictions?</summary><div class="ans"><p><strong>Because in-fold predictions are optimistic.</strong> A model predicting its own training rows looks better than it is, so the meta-model learns to trust whichever base model overfits most. Out-of-fold predictions are what each model would really produce on new data.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>When does an ensemble actually help?</summary><div class="ans"><p>When the members make <em>different</em> errors. Three boosted-tree libraries on the same features are highly correlated, so the gain is often small; mixing model families (trees with a linear model or a neural network) or different feature sets helps more. Always compare the ensemble against its best single member.</p><button class="star">Mark for review</button></div></details>
-<details class="qa"><summary>How would you explain a three-model ensemble you reported?</summary><div class="ans"><p>State, in order: the members and why each (e.g. ExtraTrees for variance, XGBoost and LightGBM for accuracy); how they were combined (averaged probabilities, weights tuned on out-of-fold predictions, or a meta-model); how the decision threshold was set if you optimised macro-F1; the validation scheme behind the number; and how much the ensemble beat the best single model. Say only what you actually did.</p><button class="star">Mark for review</button></div></details>
-<details class="qa trick"><summary><span class="tag">Trick</span> Is a boosted model with 0.946 macro-F1 on a small dataset trustworthy?</summary><div class="ans"><p><strong>Only with the right validation.</strong> On small data, report the mean and spread across folds rather than one split; group the folds if samples share an object or recording, and make sure thresholds and weights were tuned inside the cross-validation, not on the test set.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you explain an ensemble result in an interview?</summary><div class="ans"><p>State, in order: the members and why each (e.g. ExtraTrees for variance, XGBoost and LightGBM for accuracy); how they were combined (averaged probabilities, weights tuned on out-of-fold predictions, or a meta-model); how the decision threshold was set if you optimised macro-F1; the validation scheme behind the number; and how much the ensemble beat the best single model. Precision about the combination method is what interviewers probe.</p><button class="star">Mark for review</button></div></details>
+<details class="qa trick"><summary><span class="tag">Trick</span> Is a boosted model with 0.95 macro-F1 on a small dataset trustworthy?</summary><div class="ans"><p><strong>Only with the right validation.</strong> On small data, report the mean and spread across folds rather than one split; group the folds if samples share an object or recording, and make sure thresholds and weights were tuned inside the cross-validation, not on the test set.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
 <section id="dsp"><div class="wrap">
@@ -2938,7 +3066,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa trick"><summary><span class="tag">Trick</span> Are GP uncertainties automatically trustworthy?</summary><div class="ans"><p><strong>Only if the kernel fits the problem.</strong> A length-scale that is too long gives confidently wrong predictions; a stationary kernel on non-stationary data gives misleading bands. Check calibration on held-out data, as with any model.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What limits GPs at scale?</summary><div class="ans"><p>Exact inference inverts an n × n matrix: O(n³) time and O(n²) memory, so it becomes impractical past roughly 10,000 points. Sparse GPs use m ≪ n inducing points (about O(nm²)); structured kernels and GPU libraries (GPyTorch) push further.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What is a multi-output GP?</summary><div class="ans"><p>A GP that models several related outputs jointly, so learning one helps predict the others. The common form, the linear model of coregionalisation, writes the covariance as a product of an input kernel and a matrix of correlations between outputs. Useful when outputs are physically coupled, such as temperatures at several points along a combustor.</p><button class="star">Mark for review</button></div></details>
-<details class="qa"><summary>How would you explain the GP in your own temperature-profile work?</summary><div class="ans"><p>Lead with the problem (estimating a non-uniform temperature profile from limited absorption measurements), why a GP (small data, smooth physical field, uncertainty needed), the kernel and how hyperparameters were fitted, why multi-output (correlated quantities along the path), and how uncertainty was validated against experiment. Stick to what you actually did and measured.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you present a Gaussian-process project in an interview?</summary><div class="ans"><p>Lead with the problem (for example, reconstructing a physical field from a few measurements), why a GP (small data, smooth behaviour, uncertainty needed), which kernel and how its hyperparameters were fitted, whether outputs were modelled jointly and why, and how the predicted uncertainty was checked against held-out or experimental data.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>GP vs kernel ridge regression?</summary><div class="ans"><p>The posterior mean of a GP equals the kernel ridge regression solution with the same kernel and regularisation. What the GP adds is the predictive variance and a principled way, the marginal likelihood, to choose hyperparameters.</p><button class="star">Mark for review</button></div></details>
 </div></section>
 
@@ -3014,7 +3142,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 <details class="qa trick"><summary><span class="tag">Trick</span> A model with half the FLOPs — half the latency?</summary><div class="ans"><p><strong>Not necessarily.</strong> Latency depends on memory traffic, kernel efficiency and parallelism too. Depthwise convolutions have few FLOPs but low arithmetic intensity, so they can run slower than expected. Always measure on the target device.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>How do you benchmark inference properly?</summary><div class="ans"><p>On the target hardware, with warm-up runs, synchronised timing on GPU, realistic input sizes and batch, many iterations, and percentiles reported. And check accuracy after every optimisation step.</p><button class="star">Mark for review</button></div></details>
 <details class="qa"><summary>What constraints matter on embedded automotive hardware?</summary><div class="ans"><p>Fixed memory and power budgets, int8 NPUs with limited operator support, deterministic real-time deadlines, and safety certification. Design for the accelerator's supported ops from the start, rather than converting at the end.</p><button class="star">Mark for review</button></div></details>
-<details class="qa"><summary>You've optimised a model before — how do you describe it?</summary><div class="ans"><p>Name the levers precisely: 'post-training int8 quantisation with per-channel weights and a 500-image calibration set, exported through ONNX to TensorRT, latency from X to Y ms on Z hardware, accuracy drop under N points'. Precision of vocabulary is what interviewers listen for.</p><button class="star">Mark for review</button></div></details>
+<details class="qa"><summary>How do you describe model-optimisation work precisely?</summary><div class="ans"><p>Name the levers precisely: 'post-training int8 quantisation with per-channel weights and a 500-image calibration set, exported through ONNX to TensorRT, latency from X to Y ms on Z hardware, accuracy drop under N points'. Precision of vocabulary is what interviewers listen for.</p><button class="star">Mark for review</button></div></details>
 <h3>From PyTorch to an ECU</h3>
 <figure>
 <svg viewBox="0 0 720 276" role="img" aria-label="PyTorch to ONNX to C to ECU with verification and MIL/SIL/PIL/HIL ladder"><defs><marker id="mecu" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--ink-3)"/></marker><marker id="necu" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="var(--accent)"/></marker></defs><text x="20" y="20" class="s-t-a" text-anchor="start">THE EXPORT PATH</text><rect x="20" y="34" width="150" height="48" rx="5" class="s-box"/><text x="95.0" y="55.0" class="s-t" text-anchor="middle" style="font-weight:600">PyTorch</text><text x="95.0" y="70.0" class="s-t-s" text-anchor="middle">model.eval()</text><path d="M172 58 H192" class="s-arrow-a" marker-end="url(#necu)"/><rect x="196" y="34" width="150" height="48" rx="5" class="s-box-a"/><text x="271.0" y="55.0" class="s-t" text-anchor="middle" style="font-weight:600">ONNX</text><text x="271.0" y="70.0" class="s-t-s" text-anchor="middle">fixed shapes, opset</text><path d="M348 58 H368" class="s-arrow-a" marker-end="url(#necu)"/><rect x="372" y="34" width="150" height="48" rx="5" class="s-box-a"/><text x="447.0" y="55.0" class="s-t" text-anchor="middle" style="font-weight:600">C code</text><text x="447.0" y="70.0" class="s-t-s" text-anchor="middle">generated or hand-written</text><path d="M524 58 H544" class="s-arrow-a" marker-end="url(#necu)"/><rect x="548" y="34" width="150" height="48" rx="5" class="s-box"/><text x="623.0" y="55.0" class="s-t" text-anchor="middle" style="font-weight:600">ECU</text><text x="623.0" y="70.0" class="s-t-s" text-anchor="middle">static memory, WCET</text><path d="M95 86 V100 H271 V86" fill="none" stroke="var(--warn)" stroke-width="1.3" stroke-dasharray="4 3"/><text x="183" y="116" class="s-t-s" text-anchor="middle" style="fill:var(--warn)">onnxruntime vs PyTorch</text><path d="M271 86 V100 H447 V86" fill="none" stroke="var(--warn)" stroke-width="1.3" stroke-dasharray="4 3"/><text x="359" y="116" class="s-t-s" text-anchor="middle" style="fill:var(--warn)">C vs onnxruntime</text><path d="M447 86 V100 H623 V86" fill="none" stroke="var(--warn)" stroke-width="1.3" stroke-dasharray="4 3"/><text x="535" y="116" class="s-t-s" text-anchor="middle" style="fill:var(--warn)">on target vs C on PC</text><text x="20" y="136" class="s-t-s" text-anchor="start" style="font-weight:600">same golden input vectors at every step · compare outputs within a stated tolerance</text><text x="20" y="168" class="s-t-a" text-anchor="start">TESTING LADDER</text><rect x="20" y="180" width="150" height="66" rx="5" class="s-box"/><text x="32" y="199" class="s-t" text-anchor="start" style="font-weight:600">MIL</text><text x="32" y="216" class="s-t-s" text-anchor="start">model in the loop</text><text x="32" y="232" class="s-t-s" text-anchor="start">model + plant sim</text><path d="M172 213 H192" class="s-arrow" marker-end="url(#mecu)"/><rect x="196" y="180" width="150" height="66" rx="5" class="s-box"/><text x="208" y="199" class="s-t" text-anchor="start" style="font-weight:600">SIL</text><text x="208" y="216" class="s-t-s" text-anchor="start">software in the loop</text><text x="208" y="232" class="s-t-s" text-anchor="start">generated C on PC</text><path d="M348 213 H368" class="s-arrow" marker-end="url(#mecu)"/><rect x="372" y="180" width="150" height="66" rx="5" class="s-box"/><text x="384" y="199" class="s-t" text-anchor="start" style="font-weight:600">PIL</text><text x="384" y="216" class="s-t-s" text-anchor="start">processor in the loop</text><text x="384" y="232" class="s-t-s" text-anchor="start">C on target CPU</text><path d="M524 213 H544" class="s-arrow" marker-end="url(#mecu)"/><rect x="548" y="180" width="150" height="66" rx="5" class="s-box"/><text x="560" y="199" class="s-t" text-anchor="start" style="font-weight:600">HIL</text><text x="560" y="216" class="s-t-s" text-anchor="start">hardware in the loop</text><text x="560" y="232" class="s-t-s" text-anchor="start">real ECU, simulated engine</text><text x="20" y="266" class="s-t-s" text-anchor="start">each rung swaps one simulated piece for the real one — find bugs where they are cheapest</text></svg>
@@ -3109,7 +3237,7 @@ footer .wrap{padding-block:26px 34px;color:var(--ink-3);font-size:13px}
 </div></section>
 
 <footer><div class="wrap">
-  <p style="margin:0">Started for two interviews on 26 October 2026, expanded to cover the general ML engineer loop. Fundamentals first — the rest keeps.</p>
+  <p style="margin:0">Covers the general ML engineer interview loop. Fundamentals first — the rest keeps.</p>
   <p style="margin:8px 0 0">Made by <a href="https://claude.ai">Claude</a> for <a href="https://caffineaddic.github.io/">Saumya Roy</a> · <a href="https://github.com/CaffineAddic/ml-interview-playbook">source</a>.</p>
 </div></footer>
 
